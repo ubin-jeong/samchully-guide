@@ -1,1022 +1,218 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>삼천리 SL&C 웰컴 가이드</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>삼천리 SL&C 온보딩 가이드</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #f8f8f6;
+            --card-bg: #ffffff;
+            --text-main: #1a2744;
+            --text-muted: #555555;
+            --accent-teal: #0e6e6e;
+            --accent-amber: #c8892a;
+            --accent-coral: #c85a3a;
+            --border-color: #e8e4dc;
+        }
 
-  :root {
-    --navy: #1a2744;
-    --teal: #0e6e6e;
-    --teal-light: #e8f4f4;
-    --amber: #c8892a;
-    --amber-light: #fdf5e8;
-    --coral: #c85a3a;
-    --gray-50: #f8f8f6;
-    --gray-100: #f0ede8;
-    --gray-200: #ddd9d2;
-    --gray-400: #9c9890;
-    --gray-600: #5c5850;
-    --gray-800: #2c2820;
-    --white: #ffffff;
-    --page-width: 420px;
-    --page-gap: 32px;
-  }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vi;
+        }
 
-  body {
-    font-family: 'Noto Sans KR', sans-serif;
-    background: #e8e4dc;
-    min-height: 100vh;
-    padding: 48px 24px;
-    color: var(--gray-800);
-  }
+        .container {
+            max-width: 480px;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
 
-  /* ── 뷰 모드 전환 ── */
-  .view-controls {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    display: flex;
-    gap: 10px;
-    z-index: 1000;
-  }
+        h1 {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
 
-  .view-btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    background: var(--navy);
-    color: white;
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 500;
-    transition: background 0.2s;
-  }
+        .subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
 
-  .view-btn:hover {
-    background: var(--teal);
-  }
+        .brand-tags {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
 
-  .view-btn.active {
-    background: var(--teal);
-  }
+        .tag {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
 
-  /* ── 단일 페이지 뷰 ── */
-  .single-page-container {
-    display: none;
-    max-width: 100%;
-    height: 100vh;
-    overflow: hidden;
-  }
+        /* 인증 전 안내문 */
+        .auth-box {
+            background: var(--bg-color);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
 
-  .single-page-container.active {
-    display: flex;
-    flex-direction: column;
-  }
+        .auth-box p {
+            font-size: 13px;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
 
-  .single-page-wrapper {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            text-align: center;
+            outline: none;
+        }
 
-  .single-page-view {
-    width: var(--page-width);
-    min-height: 560px;
-    background: var(--white);
-    border-radius: 4px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-  }
+        input[type="password"]:focus {
+            border-color: var(--accent-teal);
+        }
 
-  .page-navigation {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-    background: var(--gray-50);
-    gap: 20px;
-  }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: var(--accent-teal);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
 
-  .nav-btn {
-    padding: 8px 16px;
-    border: 1px solid var(--gray-200);
-    border-radius: 4px;
-    background: var(--white);
-    color: var(--gray-800);
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 500;
-    transition: all 0.2s;
-  }
+        button:hover { background: #0b5555; }
 
-  .nav-btn:hover:not(:disabled) {
-    background: var(--navy);
-    color: white;
-    border-color: var(--navy);
-  }
+        /* 인증 후 메뉴 링크 (초기에는 숨김) */
+        .main-menu {
+            display: none;
+            margin-top: 20px;
+            text-align: left;
+        }
 
-  .nav-btn:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-  }
+        .menu-item {
+            display: block;
+            padding: 16px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
 
-  .page-indicator {
-    font-size: 12px;
-    color: var(--gray-600);
-    font-weight: 500;
-  }
+        .menu-item:hover {
+            border-color: var(--accent-amber);
+            background: #fffdf9;
+        }
 
-  /* ── 인쇄/화면 공통 레이아웃 ── */
-  .book-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, var(--page-width));
-    gap: var(--page-gap);
-    justify-content: center;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-
-  .book-grid.hidden {
-    display: none;
-  }
-
-  /* ── 페이지 공통 ── */
-  .page {
-    width: var(--page-width);
-    min-height: 560px;
-    background: var(--white);
-    border-radius: 4px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-    page-break-inside: avoid;
-  }
-
-  .page-inner {
-    padding: 36px 32px 28px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* 페이지 번호 */
-  .page-num {
-    position: absolute;
-    bottom: 18px;
-    right: 28px;
-    font-size: 11px;
-    color: var(--gray-400);
-    letter-spacing: 0.04em;
-  }
-
-  /* 섹션 배지 */
-  .section-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    color: var(--gray-400);
-    margin-bottom: 20px;
-  }
-  .section-badge .dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--gray-400);
-  }
-  .section-badge.teal .dot { background: var(--teal); }
-  .section-badge.teal { color: var(--teal); }
-  .section-badge.amber .dot { background: var(--amber); }
-  .section-badge.amber { color: var(--amber); }
-  .section-badge.coral .dot { background: var(--coral); }
-  .section-badge.coral { color: var(--coral); }
-  .section-badge.navy .dot { background: var(--navy); }
-  .section-badge.navy { color: var(--navy); }
-
-  /* 큰 제목 */
-  .page-title {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 1.25;
-    color: var(--navy);
-    margin-bottom: 6px;
-  }
-  .page-subtitle {
-    font-size: 13px;
-    color: var(--gray-400);
-    margin-bottom: 28px;
-    line-height: 1.5;
-  }
-
-  /* ── 표지 ── */
-  .cover-top {
-    background: var(--navy);
-    padding: 40px 32px 32px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-  .cover-brand {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    color: rgba(255,255,255,0.5);
-    margin-bottom: 20px;
-    text-transform: uppercase;
-  }
-  .cover-title {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 44px;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.1;
-    margin-bottom: 8px;
-  }
-  .cover-tagline {
-    font-size: 13px;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 28px;
-  }
-  .cover-tag {
-    display: inline-block;
-    border: 1px solid rgba(255,255,255,0.3);
-    color: rgba(255,255,255,0.7);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    padding: 5px 12px;
-    border-radius: 2px;
-    margin-bottom: 0;
-  }
-  .cover-bottom {
-    padding: 20px 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    border-top: 1px solid var(--gray-200);
-  }
-  .field-line {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .field-label {
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    color: var(--gray-400);
-  }
-  .field-input {
-    border: none;
-    border-bottom: 1px solid var(--gray-200);
-    padding: 4px 0;
-    font-size: 14px;
-    font-family: 'Noto Sans KR', sans-serif;
-    color: var(--gray-800);
-    background: transparent;
-    width: 100%;
-    outline: none;
-  }
-  .cover-footer {
-    padding: 12px 32px 16px;
-    font-size: 10px;
-    color: var(--gray-400);
-    letter-spacing: 0.06em;
-  }
-
-  /* ── 체크리스트 ── */
-  .checklist { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
-  .checklist li {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .check-circle {
-    width: 20px; height: 20px;
-    border-radius: 50%;
-    border: 1.5px solid var(--gray-200);
-    flex-shrink: 0;
-    margin-top: 1px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .check-circle.done {
-    border-color: var(--teal);
-    background: var(--teal);
-  }
-  .check-circle.done::after {
-    content: '';
-    width: 6px; height: 4px;
-    border-left: 1.5px solid #fff;
-    border-bottom: 1.5px solid #fff;
-    transform: rotate(-45deg) translateY(-1px);
-  }
-  .check-text strong { display: block; font-size: 14px; font-weight: 500; color: var(--gray-800); margin-bottom: 2px; }
-  .check-text span { font-size: 12px; color: var(--gray-400); }
-
-  /* 인용 블록 */
-  .quote-block {
-    border-left: 3px solid var(--navy);
-    padding: 10px 14px;
-    background: var(--gray-50);
-    font-size: 12px;
-    color: var(--gray-600);
-    line-height: 1.65;
-    font-style: italic;
-    border-radius: 0 3px 3px 0;
-    margin-top: auto;
-  }
-  .quote-block.teal { border-color: var(--teal); }
-  .quote-block.amber { border-color: var(--amber); }
-
-  /* 데일리 로그 */
-  .day-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px; }
-  .day-row { display: flex; align-items: center; gap: 12px; }
-  .day-label { font-size: 12px; color: var(--gray-400); width: 30px; flex-shrink: 0; }
-  .day-line { flex: 1; border-bottom: 1px solid var(--gray-200); height: 1px; }
-
-  /* 안내 박스 */
-  .info-box {
-    background: var(--gray-50);
-    border-radius: 4px;
-    padding: 14px 16px;
-    margin-top: auto;
-  }
-  .info-box-title { font-size: 11px; font-weight: 700; color: var(--teal); margin-bottom: 5px; letter-spacing: 0.04em; }
-  .info-box p { font-size: 12px; color: var(--gray-600); line-height: 1.65; }
-
-  /* 버디 리뷰 */
-  .buddy-fields { display: flex; flex-direction: column; gap: 20px; margin-bottom: 24px; }
-  .buddy-field {}
-  .buddy-field-label { font-size: 12px; color: var(--gray-400); margin-bottom: 6px; }
-  .buddy-field-line {
-    width: 100%; border: none;
-    border-bottom: 1px solid var(--gray-200);
-    padding: 6px 0; font-size: 14px;
-    font-family: 'Noto Sans KR', sans-serif;
-    color: var(--gray-800);
-    background: transparent;
-    outline: none;
-  }
-  .buddy-highlight {
-    font-size: 12px;
-    color: var(--gray-600);
-    background: var(--amber-light);
-    border-radius: 3px;
-    padding: 3px 8px;
-    display: inline-block;
-    margin-top: 4px;
-  }
-
-  /* 팀 미션 보드 */
-  .mission-board {
-    background: var(--navy);
-    border-radius: 4px;
-    padding: 18px 18px 14px;
-    margin-bottom: 18px;
-    color: #fff;
-  }
-  .mission-board-label { font-size: 10px; letter-spacing: 0.1em; color: rgba(255,255,255,0.45); margin-bottom: 8px; }
-  .mission-board-title { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 700; margin-bottom: 12px; line-height: 1.35; }
-  .mission-progress { height: 4px; background: rgba(255,255,255,0.15); border-radius: 2px; overflow: hidden; }
-  .mission-progress-bar { height: 100%; background: var(--teal); border-radius: 2px; width: 0%; transition: width 1s; }
-  .mission-stats { display: flex; gap: 16px; margin-top: 10px; }
-  .mission-stat { font-size: 11px; color: rgba(255,255,255,0.55); }
-  .mission-stat strong { color: #fff; display: block; font-size: 18px; }
-
-  /* 3도9경 행동강령 카드 */
-  .code-grid { display: flex; flex-direction: column; gap: 10px; }
-  .code-card {
-    background: var(--gray-50);
-    border-radius: 4px;
-    padding: 12px 14px;
-    border-left: 3px solid var(--gray-200);
-  }
-  .code-card.teal { border-color: var(--teal); }
-  .code-card.amber { border-color: var(--amber); }
-  .code-card.coral { border-color: var(--coral); }
-  .code-card.navy { border-color: var(--navy); }
-  .code-num { font-size: 10px; letter-spacing: 0.06em; color: var(--gray-400); margin-bottom: 3px; }
-  .code-name { font-size: 12px; font-weight: 700; color: var(--gray-800); margin-bottom: 4px; }
-  .code-line { font-size: 12px; color: var(--gray-600); line-height: 1.55; font-style: italic; }
-
-  /* 성장 카드 */
-  .growth-card {
-    border: 1.5px solid var(--gray-200);
-    border-radius: 4px;
-    padding: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin-bottom: 16px;
-  }
-  .growth-item { display: flex; flex-direction: column; gap: 5px; }
-  .growth-label { font-size: 11px; color: var(--gray-400); }
-  .growth-line { border-bottom: 1px solid var(--gray-200); padding-bottom: 8px; font-size: 13px; color: var(--gray-800); min-height: 28px; }
-
-  /* VOE */
-  .voe-box {
-    background: var(--teal-light);
-    border-radius: 4px;
-    padding: 16px;
-    margin-bottom: 16px;
-  }
-  .voe-title { font-size: 12px; font-weight: 700; color: var(--teal); margin-bottom: 10px; }
-  .voe-fields { display: flex; flex-direction: column; gap: 12px; }
-  .voe-field-label { font-size: 11px; color: var(--teal); margin-bottom: 4px; }
-  .voe-field-line { width: 100%; border: none; border-bottom: 1px solid rgba(14,110,110,0.25); padding: 4px 0; font-size: 13px; background: transparent; font-family: 'Noto Sans KR', sans-serif; outline: none; }
-
-  /* 수료 */
-  .complete-box {
-    background: var(--navy);
-    border-radius: 4px;
-    padding: 24px 20px;
-    text-align: center;
-    color: #fff;
-    margin-bottom: 16px;
-  }
-  .complete-icon { font-size: 28px; margin-bottom: 8px; }
-  .complete-title { font-family: 'Noto Serif KR', serif; font-size: 20px; font-weight: 700; margin-bottom: 6px; }
-  .complete-sub { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.6; }
-  .sign-area { display: flex; justify-content: flex-end; gap: 24px; margin-top: 16px; }
-  .sign-field { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-  .sign-line { width: 80px; border-bottom: 1px solid var(--gray-200); margin-bottom: 4px; height: 28px; }
-  .sign-label { font-size: 10px; color: var(--gray-400); }
-
-  /* 구분선 */
-  .divider { border: none; border-top: 1px solid var(--gray-100); margin: 16px 0; }
-
-  /* 섹션 헤더 (full-width) */
-  .section-header {
-    background: var(--gray-50);
-    border-top: 3px solid var(--navy);
-    padding: 28px 32px 24px;
-  }
-  .section-header.teal { border-color: var(--teal); }
-  .section-header.amber { border-color: var(--amber); }
-  .section-header.coral { border-color: var(--coral); }
-
-  /* 타임라인 */
-  .timeline { display: flex; gap: 0; margin-bottom: 24px; }
-  .tl-item { flex: 1; position: relative; }
-  .tl-item:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    top: 14px; right: 0;
-    width: 100%; height: 1px;
-    background: var(--gray-200);
-    z-index: 0;
-  }
-  .tl-dot {
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    background: var(--white);
-    border: 2px solid var(--gray-200);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 10px; font-weight: 700; color: var(--gray-400);
-    position: relative; z-index: 1;
-    margin-bottom: 8px;
-  }
-  .tl-item.active .tl-dot { border-color: var(--teal); color: var(--teal); background: var(--teal-light); }
-  .tl-label { font-size: 10px; color: var(--gray-400); }
-  .tl-item.active .tl-label { color: var(--teal); font-weight: 500; }
-
-  @media print {
-    body { background: white; padding: 0; }
-    .book-grid { gap: 0; grid-template-columns: var(--page-width); }
-    .page { box-shadow: none; border-radius: 0; page-break-after: always; }
-    .view-controls, .single-page-container { display: none; }
-  }
-</style>
+        .menu-item span {
+            font-size: 12px;
+            display: block;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+    </style>
 </head>
 <body>
 
-<!-- ══════════════════ 뷰 전환 버튼 ══════════════════ -->
-<div class="view-controls">
-  <button class="view-btn active" onclick="switchView('grid')">한 페이지씩</button>
-  <button class="view-btn" onclick="switchView('all')">전체 보기</button>
-</div>
+<div class="container">
+    <span>삼천리 SL&C 외식사업부</span>
+    <h1>환영합니다, 선배님.</h1>
+    <p class="subtitle">따뜻한 사람 중심의 일터, 삼천리에서 함께 일하게 되어 기쁩니다.</p>
 
-<!-- ══════════════════ 단일 페이지 뷰 ══════════════════ -->
-<div class="single-page-container active">
-  <div class="single-page-wrapper">
-    <div id="singlePageView" class="single-page-view"></div>
-  </div>
-  <div class="page-navigation">
-    <button class="nav-btn" id="prevBtn" onclick="previousPage()">← 이전</button>
-    <span class="page-indicator"><span id="currentPage">1</span> / <span id="totalPages">24</span></span>
-    <button class="nav-btn" id="nextBtn" onclick="nextPage()">다음 →</button>
-  </div>
-</div>
-
-<!-- ══════════════════ 전체 그리드 뷰 ══════════════════ -->
-<div class="book-grid" id="bookGrid">
-
-  <!-- ══════════════════ 표지 ══════════════════ -->
-  <div class="page" style="min-height:600px;">
-    <div class="cover-top" style="min-height:360px;">
-      <div class="cover-brand">삼천리 SL&amp;C</div>
-      <div class="cover-title">웰컴<br>가이드</div>
-      <div class="cover-tagline">나는 오늘부터<br>삼천리입니다</div>
-      <div class="cover-tag">30 · 60 · 90 Day Onboarding</div>
+    <div class="brand-tags">
+        <span class="tag">호우섬</span>
+        <span class="tag">Chai 797</span>
+        <span class="tag">정육점</span>
+        <span class="tag">이타마에 스시</span>
     </div>
-    <div class="cover-bottom">
-      <div class="field-line">
-        <div class="field-label">이 름</div>
-        <input class="field-input" type="text" placeholder="">
-      </div>
-      <div class="field-line">
-        <div class="field-label">매 장</div>
-        <input class="field-input" type="text" placeholder="">
-      </div>
-      <div class="field-line">
-        <div class="field-label">입사일</div>
-        <input class="field-input" type="text" placeholder="">
-      </div>
+
+    <div id="authBox" class="auth-box">
+        <p>안내받으신 매장별 고유 코드를 입력해 주세요.</p>
+        <input type="password" id="storeCode" placeholder="매장 코드 입력">
+        <button onclick="checkCode()">입장하기</button>
     </div>
-    <div class="cover-footer">삼천리 SL&amp;C 행동정착 프로그램</div>
-    <div class="page-num">표지</div>
-  </div>
 
-  <!-- ══════════════════ Pre-boarding ══════════════════ -->
-  <div class="page">
-    <div class="page-inner">
-      <div class="section-badge teal"><span class="dot"></span>Pre-boarding</div>
-      <div class="page-title">오늘부터<br>당신은<br>삼천리입니다</div>
-      <div class="page-subtitle">첫 출근 전, 아래 3가지를 확인하세요</div>
-
-      <ul class="checklist">
-        <li>
-          <div class="check-circle done"></div>
-          <div class="check-text">
-            <strong>근로계약서 확인</strong>
-            <span>급여·근무시간·서명 확인</span>
-          </div>
-        </li>
-        <li>
-          <div class="check-circle"></div>
-          <div class="check-text">
-            <strong>매장 첫 방문 미션</strong>
-            <span>손님으로 방문 후 느낀 점 메모</span>
-          </div>
-        </li>
-        <li>
-          <div class="check-circle"></div>
-          <div class="check-text">
-            <strong>사전 교육 영상 시청</strong>
-            <span>카카오톡으로 전송된 링크</span>
-          </div>
-        </li>
-      </ul>
-
-      <div style="background:var(--gray-50);border-radius:4px;padding:14px 16px;margin-bottom:16px;">
-        <div style="font-size:11px;font-weight:700;color:var(--gray-600);margin-bottom:8px;">매장 첫 방문 — 내가 느낀 것</div>
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <div>
-            <div style="font-size:11px;color:var(--gray-400);margin-bottom:4px;">가장 인상 깊었던 것</div>
-            <div style="border-bottom:1px solid var(--gray-200);height:24px;"></div>
-          </div>
-          <div>
-            <div style="font-size:11px;color:var(--gray-400);margin-bottom:4px;">손님으로서 불편했던 것</div>
-            <div style="border-bottom:1px solid var(--gray-200);height:24px;"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="quote-block">
-        "삼천리는 1973년부터 구성원 한 사람을 온전한 인간으로 대우해왔습니다"
-      </div>
+    <div id="mainMenu" class="main-menu">
+        <p style="font-size: 13px; margin-bottom: 15px; color: var(--accent-teal); font-weight: bold; text-align: center;">✓ 인증 완료! 이동할 페이지를 선택하세요.</p>
+        
+        <a href="3do9gyeong.html" class="menu-item">
+            <span>Core Value</span>
+            📌 3도 9경 행동강령 카드 보기
+        </a>
+        <a href="journey.html" class="menu-item">
+            <span>Onboarding Roadmap</span>
+            🏃‍♂️ 90일 온보딩 여정 & 체크리스트
+        </a>
+        <a href="voe.html" class="menu-item">
+            <span>Voice of Employee</span>
+            💬 현장의 소리 (VOE) 제출하기
+        </a>
     </div>
-    <div class="page-num">p.1</div>
-  </div>
-
-  <!-- ══════════════════ 3도9경 소개 ══════════════════ -->
-  <div class="page">
-    <div class="page-inner">
-      <div class="section-badge navy"><span class="dot"></span>삼천리의 약속</div>
-      <div class="page-title" style="font-size:26px;">3도 9경,<br>우리가 일하는<br>방식입니다</div>
-      <div class="page-subtitle" style="margin-bottom:20px;">삼천리 경영 철학을 현장 언어로</div>
-
-      <div class="code-grid">
-        <div style="font-size:11px;font-weight:700;color:var(--teal);margin-bottom:2px;letter-spacing:0.06em;">즐거운 경영</div>
-        <div class="code-card teal">
-          <div class="code-num">1경 · 가정애 직장애</div>
-          <div class="code-line">나를 먼저 챙겨야 손님을 챙길 수 있다</div>
-        </div>
-        <div class="code-card teal">
-          <div class="code-num">2경 · 자율과 책임</div>
-          <div class="code-line">시키기 전에 먼저 하고, 실수하면 즉시 말한다</div>
-        </div>
-        <div class="code-card teal">
-          <div class="code-num">3경 · 열린 소통</div>
-          <div class="code-line">모르면 모른다고 말하는 게 가장 빠른 길이다</div>
-        </div>
-
-        <div style="font-size:11px;font-weight:700;color:var(--amber);margin-top:6px;margin-bottom:2px;letter-spacing:0.06em;">준비된 경영</div>
-        <div class="code-card amber">
-          <div class="code-num">4경 · 안전환경</div>
-          <div class="code-line">내가 낸 음식은 내 가족이 먹는다고 생각한다</div>
-        </div>
-        <div class="code-card amber">
-          <div class="code-num">5경 · 인재중시</div>
-          <div class="code-line">오늘 배운 것 하나를 내 언어로 말할 수 있으면 된다</div>
-        </div>
-        <div class="code-card amber">
-          <div class="code-num">6경 · 혁신도전</div>
-          <div class="code-line">더 좋은 방법이 보이면 말하세요, 틀려도 괜찮습니다</div>
-        </div>
-
-        <div style="font-size:11px;font-weight:700;color:var(--coral);margin-top:6px;margin-bottom:2px;letter-spacing:0.06em;">함께하는 경영</div>
-        <div class="code-card coral">
-          <div class="code-num">7경 · 기업가치</div>
-          <div class="code-line">내가 곧 이 브랜드입니다</div>
-        </div>
-        <div class="code-card coral">
-          <div class="code-num">8경 · 고객중심</div>
-          <div class="code-line">손님이 부르기 전에 이미 옆에 있어야 한다</div>
-        </div>
-        <div class="code-card coral">
-          <div class="code-num">9경 · 나눔상생</div>
-          <div class="code-line">내가 알게 된 것은 다음 사람에게 넘겨줘야 완성된다</div>
-        </div>
-      </div>
-    </div>
-    <div class="page-num">p.2</div>
-  </div>
-
-  <!-- ══════════════════ 30일 — 데일리 미션 ══════════════════ -->
-  <div class="page">
-    <div class="section-header teal">
-      <div class="section-badge teal"><span class="dot"></span>30일 · 직무숙련</div>
-      <div class="page-title" style="font-size:28px;">오늘의 미션,<br>하나만 잘하면<br>됩니다</div>
-      <div class="page-subtitle">매일 하나의 행동 목표를 기록하세요</div>
-    </div>
-    <div class="page-inner" style="padding-top:24px;">
-      <div class="day-list">
-        <div class="day-row"><div class="day-label">1일차</div><div class="day-line"></div></div>
-        <div class="day-row"><div class="day-label">2일차</div><div class="day-line"></div></div>
-        <div class="day-row"><div class="day-label">3일차</div><div class="day-line"></div></div>
-        <div class="day-row"><div class="day-label">4일차</div><div class="day-line"></div></div>
-        <div class="day-row"><div class="day-label">5일차</div><div class="day-line"></div></div>
-        <div class="day-row"><div class="day-label">6일차</div><div class="day-line"></div></div>
-        <div class="day-row"><div class="day-label">7일차</div><div class="day-line"></div></div>
-      </div>
-      <div class="info-box">
-        <div class="info-box-title">데일리 원씽</div>
-        <p>퇴근 전 2분, 오늘의 목표가 어떻게 됐는지 한 줄만 적어요</p>
-      </div>
-    </div>
-    <div class="page-num">p.5</div>
-  </div>
-
-  <!-- ══════════════════ 30일 — 10단계 매뉴얼 ══════════════════ -->
-  <div class="page">
-    <div class="page-inner">
-      <div class="section-badge teal"><span class="dot"></span>30일 · 직무숙련</div>
-      <div class="page-title" style="font-size:24px;">직무 수행<br>10단계 체크</div>
-      <div class="page-subtitle">완료하면 트레이너에게 스탐프를 받으세요</div>
-
-      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">
-        <div style="display:grid;grid-template-columns:24px 1fr 40px;gap:8px;align-items:center;padding:10px 12px;background:var(--gray-50);border-radius:3px;" v-for="i in 10">
-          <div style="font-size:11px;color:var(--gray-400);">01</div>
-          <div style="font-size:13px;color:var(--gray-800);">위생 및 복장 기준 준수</div>
-          <div style="width:36px;height:36px;border:1.5px dashed var(--gray-200);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--gray-400);">도장</div>
-        </div>
-        <div style="display:grid;grid-template-columns:24px 1fr 40px;gap:8px;align-items:center;padding:10px 12px;background:var(--gray-50);border-radius:3px;">
-          <div style="font-size:11px;color:var(--gray-400);">02</div>
-          <div style="font-size:13px;color:var(--gray-800);">알레르기·메뉴 정보 숙지</div>
-          <div style="width:36px;height:36px;border:1.5px dashed var(--gray-200);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--gray-400);">도장</div>
-        </div>
-        <div style="display:grid;grid-template-columns:24px 1fr 40px;gap:8px;align-items:center;padding:10px 12px;background:var(--gray-50);border-radius:3px;">
-          <div style="font-size:11px;color:var(--gray-400);">03</div>
-          <div style="font-size:13px;color:var(--gray-800);">서비스 순서 암기 및 실행</div>
-          <div style="width:36px;height:36px;border:1.5px dashed var(--gray-200);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--gray-400);">도장</div>
-        </div>
-        <div style="display:grid;grid-template-columns:24px 1fr 40px;gap:8px;align-items:center;padding:10px 12px;background:var(--gray-50);border-radius:3px;">
-          <div style="font-size:11px;color:var(--gray-400);">04</div>
-          <div style="font-size:13px;color:var(--gray-800);">담당 파트 동작 수행</div>
-          <div style="width:36px;height:36px;border:1.5px dashed var(--gray-200);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--gray-400);">도장</div>
-        </div>
-        <div style="display:grid;grid-template-columns:24px 1fr 40px;gap:8px;align-items:center;padding:10px 12px;background:var(--gray-50);border-radius:3px;">
-          <div style="font-size:11px;color:var(--gray-400);">05</div>
-          <div style="font-size:13px;color:var(--gray-800);">컴플레인 보고 1회 경험</div>
-          <div style="width:36px;height:36px;border:1.5px dashed var(--gray-200);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--gray-400);">도장</div>
-        </div>
-        <div style="display:grid;grid-template-columns:24px 1fr 40px;gap:8px;align-items:center;padding:10px 12px;background:var(--gray-50);border-radius:3px;">
-          <div style="font-size:11px;color:var(--gray-400);">06</div>
-          <div style="font-size:13px;color:var(--gray-800);">오픈 or 마감 동선 숙지</div>
-          <div style="width:36px;height:36px;border:1.5px dashed var(--gray-200);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--gray-400);">도장</div>
-        </div>
-        <div style="display:grid;grid-template-columns:24px 1fr 40px;gap:8px;align-items:center;padding:10px 12px;background:var(--gray-50);border-radius:3px;">
-          <div style="font-size:11px;color:var(--gray-400);">07</div>
-          <div style="font-size:13px;color:var(--gray-800);">체크백 2분 이내 수행</div>
-          <div style="width:36px;height:36px;border:1.5px dashed var(--gray-200);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--gray-400);">도장</div>
-        </div>
-        <div style="display:grid;grid-template-columns:24px 1fr 40px;gap:8px;align-items:center;padding:10px 12px;background:var(--gray-50);border-radius:3px;">
-          <div style="font-size:11px;color:var(--gray-400);">08</div>
-          <div style="font-size:13px;color:var(--gray-800);">자기소개 + 코스터 루틴 완료</div>
-          <div style="width:36px;height:36px;border:1.5px dashed var(--gray-200);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--gray-400);">도장</div>
-        </div>
-        <div style="display:grid;grid-template-columns:24px 1fr 40px;gap:8px;align-items:center;padding:10px 12px;background:var(--gray-50);border-radius:3px;">
-          <div style="font-size:11px;color:var(--gray-400);">09</div>
-          <div style="font-size:13px;color:var(--gray-800);">팀원에게 노하우 1개 공유</div>
-          <div style="width:36px;height:36px;border:1.5px dashed var(--gray-200);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--gray-400);">도장</div>
-        </div>
-        <div style="display:grid;grid-template-columns:24px 1fr 40px;gap:8px;align-items:center;padding:10px 12px;background:var(--teal-light);border-radius:3px;border:1px solid var(--teal);">
-          <div style="font-size:11px;color:var(--teal);font-weight:700;">10</div>
-          <div style="font-size:13px;color:var(--teal);font-weight:500;">30일 관문 테스트 통과 🎉</div>
-          <div style="width:36px;height:36px;border:1.5px solid var(--teal);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--teal);font-weight:700;">완료</div>
-        </div>
-      </div>
-    </div>
-    <div class="page-num">p.7</div>
-  </div>
-
-  <!-- ══════════════════ 60일 — 버디 리뷰 ══════════════════ -->
-  <div class="page">
-    <div class="section-header amber">
-      <div class="section-badge amber"><span class="dot"></span>60일 · 팀워크</div>
-      <div class="page-title" style="font-size:28px;">버디와 함께<br>솔직하게<br>얘기해요</div>
-      <div class="page-subtitle">사수와 1:1 버디 리뷰 — 각자 하나씩</div>
-    </div>
-    <div class="page-inner" style="padding-top:24px;">
-      <div class="buddy-fields">
-        <div class="buddy-field">
-          <div class="buddy-field-label">내가 가장 잘하게 된 것</div>
-          <input class="buddy-field-line" type="text">
-        </div>
-        <div class="buddy-field">
-          <div class="buddy-field-label">솔직하게 써도 괜찮아요</div>
-          <div style="margin-bottom:6px;"></div>
-          <div class="buddy-field-label">아직 부족한 것 하나</div>
-          <input class="buddy-field-line" type="text">
-        </div>
-        <div class="buddy-field">
-          <div class="buddy-field-label">다음 30일의 집중 포인트</div>
-          <input class="buddy-field-line" type="text">
-          <div class="buddy-highlight">다음 30일의 집중 포인트가 됩니다</div>
-        </div>
-      </div>
-      <div class="quote-block amber">
-        열린 소통은 삼천리 70년 무분규 문화의 시작입니다
-      </div>
-    </div>
-    <div class="page-num">p.13</div>
-  </div>
-
-  <!-- ══════════════════ 60일 — 팀 미션 보드 ══════════════════ -->
-  <div class="page">
-    <div class="page-inner">
-      <div class="section-badge amber"><span class="dot"></span>60일 · 팀워크</div>
-      <div class="page-title" style="font-size:24px;margin-bottom:6px;">이번 주<br>우리 팀 미션</div>
-      <div class="page-subtitle">함께 달성하면 팀 전체가 보상받아요</div>
-
-      <div class="mission-board">
-        <div class="mission-board-label">THIS WEEK'S MISSION</div>
-        <div class="mission-board-title">체크백 완료율<br>90% 달성하기</div>
-        <div class="mission-progress"><div class="mission-progress-bar" id="mpb"></div></div>
-        <div class="mission-stats">
-          <div class="mission-stat"><strong id="ms-done">0</strong>완료</div>
-          <div class="mission-stat"><strong>10</strong>목표</div>
-        </div>
-      </div>
-
-      <div style="font-size:12px;color:var(--gray-600);margin-bottom:12px;font-weight:500;">이번 주 보상</div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
-        <div style="background:var(--amber-light);border-radius:3px;padding:6px 12px;font-size:12px;color:var(--amber);font-weight:500;">다음 달 선호 스케줄 우선권</div>
-        <div style="background:var(--gray-50);border-radius:3px;padding:6px 12px;font-size:12px;color:var(--gray-600);">조기 퇴근 30분</div>
-      </div>
-
-      <div style="font-size:12px;color:var(--gray-600);margin-bottom:10px;font-weight:500;">팀원 기록판</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-        <div style="background:var(--gray-50);border-radius:3px;padding:10px;font-size:12px;">
-          <div style="color:var(--gray-400);margin-bottom:4px;">이름</div>
-          <div style="border-bottom:1px solid var(--gray-200);height:20px;"></div>
-        </div>
-        <div style="background:var(--gray-50);border-radius:3px;padding:10px;font-size:12px;">
-          <div style="color:var(--gray-400);margin-bottom:4px;">이름</div>
-          <div style="border-bottom:1px solid var(--gray-200);height:20px;"></div>
-        </div>
-        <div style="background:var(--gray-50);border-radius:3px;padding:10px;font-size:12px;">
-          <div style="color:var(--gray-400);margin-bottom:4px;">이름</div>
-          <div style="border-bottom:1px solid var(--gray-200);height:20px;"></div>
-        </div>
-        <div style="background:var(--gray-50);border-radius:3px;padding:10px;font-size:12px;">
-          <div style="color:var(--gray-400);margin-bottom:4px;">이름</div>
-          <div style="border-bottom:1px solid var(--gray-200);height:20px;"></div>
-        </div>
-      </div>
-    </div>
-    <div class="page-num">p.15</div>
-  </div>
-
-  <!-- ══════════════════ 90일 — 성장 카드 ══════════════════ -->
-  <div class="page">
-    <div class="section-header coral">
-      <div class="section-badge coral"><span class="dot"></span>90일 · 가치체화</div>
-      <div class="page-title" style="font-size:28px;">입사 전,<br>내가 쓴<br>카드입니다</div>
-      <div class="page-subtitle">30일 전에 봉투에 담아 두었던 그 카드</div>
-    </div>
-    <div class="page-inner" style="padding-top:24px;">
-      <div style="font-size:12px;color:var(--gray-600);margin-bottom:14px;font-weight:500;">그때 나는 이렇게 썼습니다</div>
-      <div class="growth-card">
-        <div class="growth-item">
-          <div class="growth-label">잘하고 싶었던 것 (입사 전 작성)</div>
-          <div class="growth-line" style="color:var(--gray-400);font-style:italic;font-size:12px;">봉투를 열어 확인하세요</div>
-        </div>
-        <div class="growth-item">
-          <div class="growth-label">걱정했던 것 (입사 전 작성)</div>
-          <div class="growth-line" style="color:var(--gray-400);font-style:italic;font-size:12px;">봉투를 열어 확인하세요</div>
-        </div>
-      </div>
-      <div style="font-size:12px;color:var(--gray-600);margin-bottom:14px;font-weight:500;">90일이 지난 지금은</div>
-      <div class="growth-card">
-        <div class="growth-item">
-          <div class="growth-label">실제로 잘하게 된 것</div>
-          <div class="growth-line"></div>
-        </div>
-        <div class="growth-item">
-          <div class="growth-label">걱정이 어떻게 됐나요</div>
-          <div class="growth-line"></div>
-        </div>
-      </div>
-    </div>
-    <div class="page-num">p.19</div>
-  </div>
-
-  <!-- ══════════════════ 90일 — VOE ══════════════════ -->
-  <div class="page">
-    <div class="page-inner">
-      <div class="section-badge coral"><span class="dot"></span>90일 · 가치체화</div>
-      <div class="page-title" style="font-size:24px;margin-bottom:6px;">당신의 목소리가<br>매장을 바꿉니다</div>
-      <div class="page-subtitle">VOE — Voice of Employee</div>
-
-      <div class="voe-box">
-        <div class="voe-title">내가 바꾸고 싶은 것 하나</div>
-        <div class="voe-fields">
-          <div>
-            <div class="voe-field-label">어떤 상황인가요?</div>
-            <input class="voe-field-line" type="text">
-          </div>
-          <div>
-            <div class="voe-field-label">이렇게 바꾸면 어떨까요?</div>
-            <input class="voe-field-line" type="text">
-          </div>
-        </div>
-      </div>
-
-      <div style="background:var(--gray-50);border-radius:4px;padding:14px 16px;margin-bottom:16px;">
-        <div style="font-size:11px;font-weight:700;color:var(--gray-600);margin-bottom:8px;">내가 지키고 싶은 것 하나</div>
-        <input style="width:100%;border:none;border-bottom:1px solid var(--gray-200);padding:6px 0;font-size:13px;font-family:Noto Sans KR,sans-serif;background:transparent;outline:none;" type="text">
-      </div>
-
-      <div style="background:var(--gray-50);border-radius:4px;padding:14px 16px;margin-bottom:16px;">
-        <div style="font-size:11px;font-weight:700;color:var(--gray-600);margin-bottom:8px;">나만의 서비스 루틴</div>
-        <div style="font-size:12px;color:var(--gray-400);margin-bottom:8px;">90일 동안 내가 체득한 것</div>
-        <input style="width:100%;border:none;border-bottom:1px solid var(--gray-200);padding:6px 0;font-size:13px;font-family:Noto Sans KR,sans-serif;background:transparent;outline:none;" type="text">
-      </div>
-
-      <div class="quote-block">
-        "현장의 목소리가 경영의 방향을 움직이는 구조, 이것이 삼천리의 열린 소통입니다"
-      </div>
-    </div>
-    <div class="page-num">p.21</div>
-  </div>
-
-  <!-- ══════════════════ 수료 ══════════════════ -->
-  <div class="page">
-    <div class="page-inner" style="justify-content:center;">
-      <div class="section-badge navy" style="justify-content:center;margin-bottom:28px;"><span class="dot"></span>90일 완주</div>
-
-      <div class="complete-box">
-        <div class="complete-icon">✦</div>
-        <div class="complete-title">수고했습니다,<br>이제 진짜 삼천리입니다</div>
-        <div class="complete-sub">90일 동안 당신이 쌓은 것은<br>사라지지 않습니다</div>
-      </div>
-
-      <div style="font-size:12px;color:var(--gray-600);margin-bottom:14px;font-weight:500;text-align:center;">다음 한 걸음</div>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:24px;">
-        <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--gray-50);border-radius:3px;">
-          <div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div>
-          <div style="font-size:13px;color:var(--gray-800);">다음 기수 신입의 트레이너 도전해보기</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--gray-50);border-radius:3px;">
-          <div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div>
-          <div style="font-size:13px;color:var(--gray-800);">나만의 서비스 루틴 팀원에게 공유하기</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--gray-50);border-radius:3px;">
-          <div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div>
-          <div style="font-size:13px;color:var(--gray-800);">VOE가 실제로 반영되는지 확인하기</div>
-        </div>
-      </div>
-
-      <div class="sign-area">
-        <div class="sign-field">
-          <div class="sign-line"></div>
-          <div class="sign-label">본인 서명</div>
-        </div>
-        <div class="sign-field">
-          <div class="sign-line"></div>
-          <div class="sign-label">점장 확인</div>
-        </div>
-      </div>
-    </div>
-    <div class="page-num">p.24</div>
-  </div>
-
 </div>
 
 <script>
-  let currentPageIndex = 0;
-  const pages = document.querySelectorAll('.page');
-  const totalPages = pages.length;
+    // 임시 코드 설정 (원하는 코드로 변경 가능)
+    const CORRECT_CODE = "samchully2026";
 
-  function updateSinglePageView() {
-    const viewContainer = document.getElementById('singlePageView');
-    const currentPage = pages[currentPageIndex];
-    viewContainer.innerHTML = currentPage.innerHTML;
-    
-    document.getElementById('currentPage').textContent = currentPageIndex + 1;
-    document.getElementById('totalPages').textContent = totalPages;
-    
-    // 버튼 활성화/비활성화
-    document.getElementById('prevBtn').disabled = currentPageIndex === 0;
-    document.getElementById('nextBtn').disabled = currentPageIndex === totalPages - 1;
-
-    // 미션 보드 애니메이션이 있으면 재실행
-    const bar = viewContainer.querySelector('#mpb');
-    const stat = viewContainer.querySelector('#ms-done');
-    if (bar && stat) {
-      let v = 0;
-      const t = setInterval(() => {
-        v += 3;
-        if (v > 65) { clearInterval(t); v = 65; }
-        bar.style.width = v + '%';
-        if (stat) stat.textContent = Math.round(v / 10);
-      }, 20);
+    function checkCode() {
+        const inputCode = document.getElementById("storeCode").value;
+        if(inputCode === CORRECT_CODE) {
+            document.getElementById("authBox").style.display = "none";
+            document.getElementById("mainMenu").style.display = "block";
+            // 브라우저 세션에 인증 상태 저장 (다른 페이지 이동 시 활용 가능)
+            sessionStorage.setItem("slc_authenticated", "true");
+        } else {
+            alert("코드가 일치하지 않습니다. 매장 점장님께 문의해 주세요.");
+        }
     }
-  }
 
-  function nextPage() {
-    if (currentPageIndex < totalPages - 1) {
-      currentPageIndex++;
-      updateSinglePageView();
+    // 이미 이전 페이지에서 인증했다면 바로 메뉴 보여주기
+    window.onload = function() {
+        if(sessionStorage.getItem("slc_authenticated") === "true") {
+            document.getElementById("authBox").style.display = "none";
+            document.getElementById("mainMenu").style.display = "block";
+        }
     }
-  }
-
-  function previousPage() {
-    if (currentPageIndex > 0) {
-      currentPageIndex--;
-      updateSinglePageView();
-    }
-  }
-
-  function switchView(view) {
-    const singleContainer = document.querySelector('.single-page-container');
-    const gridView = document.getElementById('bookGrid');
-    const buttons = document.querySelectorAll('.view-btn');
-
-    if (view === 'grid') {
-      singleContainer.classList.remove('active');
-      gridView.classList.remove('hidden');
-      buttons[0].classList.add('active');
-      buttons[1].classList.remove('active');
-    } else {
-      singleContainer.classList.add('active');
-      gridView.classList.add('hidden');
-      buttons[0].classList.remove('active');
-      buttons[1].classList.add('active');
-      updateSinglePageView();
-    }
-  }
-
-  // 초기화
-  updateSinglePageView();
-
-  // 미션 보드 애니메이션 (전체 보기용)
-  setTimeout(() => {
-    const bar = document.getElementById('mpb');
-    const stat = document.getElementById('ms-done');
-    if (bar) {
-      let v = 0;
-      const t = setInterval(() => {
-        v += 3;
-        if (v > 65) { clearInterval(t); v = 65; }
-        bar.style.width = v + '%';
-        if (stat) stat.textContent = Math.round(v / 10);
-      }, 20);
-    }
-  }, 600);
 </script>
+
 </body>
 </html>

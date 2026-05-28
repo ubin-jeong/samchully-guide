@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>직원의 소리(VOE) - 삼천리 SL&C</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #f8f8f6;
+            --card-bg: #ffffff;
+            --text-main: #1a2744;
+            --text-muted: #555555;
+            --accent-teal: #0e6e6e;
+            --border-color: #e8e4dc;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Noto Sans KR', sans-serif;
+            padding: 20px 15px;
+        }
+
+        .nav-buttons {
+            max-width: 500px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 20px auto;
+            background: var(--card-bg);
+            padding: 35px 25px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        h1 {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        input[type="text"], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            background: var(--bg-color);
+            outline: none;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--accent-teal);
+            background: #ffffff;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--accent-teal);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #0b5555;
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav-buttons">
+    <a href="journey.html" class="btn-link">← 여정으로 돌아가기</a>
+    <a href="index.html" class="btn-link">처음으로</a>
+</div>
+
+<div class="container">
+    <h1>직원의 소리 (VOE)</h1>
+    <p class="desc">매장 근무 중 겪는 어려움, 바라는 점, 혹은 개선 아이디어가 있다면 자유롭게 들려주세요. 본 내용은 담당자에게 이메일로 안전하게 전달됩니다.</p>
+
+    <form id="voeForm" onsubmit="handleVoeSubmit(event)">
+        <div class="form-group">
+            <label for="storeName">소속 매장명</label>
+            <select id="storeName" required>
+                <option value="">매장을 선택해 주세요</option>
+                <option value="호우섬">호우섬</option>
+                <option value="Chai 797">Chai 797</option>
+                <option value="정육점">정육점</option>
+                <option value="이타마에 스시">이타마에 스시</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="userName">작성자 이름 (익명 가능)</label>
+            <input type="text" id="userName" placeholder="이름을 입력하거나 공란으로 두세요">
+        </div>
+
+        <div class="form-group">
+            <label for="content">의견 및 건의사항</label>
+            <textarea id="content" placeholder="현장의 애로사항이나 개선점을 상세히 적어주세요." required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">소리 전달하기</button>
+    </form>
+</div>
+
+<script>
+    function handleVoeSubmit(event) {
+        event.preventDefault();
+        
+        const store = document.getElementById('storeName').value;
+        const name = document.getElementById('userName').value || "익명의 신입 동료";
+        const content = document.getElementById('content').value;
+        
+        // 수신받을 담당자 이메일 주소 (실제 인사담당자나 점장 메일로 변경하세요)
+        const managerEmail = "hr_slc@samchully.co.kr"; 
+        
+        const subject = encodeURIComponent(`[VOE] ${store} - ${name}님의 현장 의견`);
+        const body = encodeURIComponent(`소속 매장: ${store}\n작성자: ${name}\n\n[내용]\n${content}`);
+        
+        // mailto를 이용해 아웃룩이나 모바일 기본 메일 앱으로 전송 연동 (MVP의 가장 확실한 방법)
+        window.location.href = `mailto:${managerEmail}?subject=${subject}&body=${body}`;
+        
+        alert("이메일 프로그램으로 연결됩니다. 발송 버튼을 누르면 제출이 완료됩니다!");
+    }
+</script>
+
+</body>
+</html>

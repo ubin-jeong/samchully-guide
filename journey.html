@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>90일 온보딩 여정 - 삼천리 SL&C</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #f8f8f6;
+            --card-bg: #ffffff;
+            --text-main: #1a2744;
+            --text-muted: #555555;
+            --accent-teal: #0e6e6e;
+            --accent-coral: #c85a3a;
+            --border-color: #e8e4dc;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Noto Sans KR', sans-serif;
+            padding: 20px 15px;
+        }
+
+        .nav-buttons {
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .header {
+            max-width: 600px;
+            margin: 20px auto 30px auto;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        /* 고정형 진행률 바 */
+        .progress-container {
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .progress-bar-bg {
+            background: var(--bg-color);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-bar-fill {
+            background: var(--accent-teal);
+            width: 0%;
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .section-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 18px;
+            color: var(--text-main);
+            margin: 30px auto 15px auto;
+            max-width: 600px;
+            border-bottom: 1px solid var(--text-main);
+            padding-bottom: 6px;
+        }
+
+        .section-desc {
+            font-size: 12px;
+            color: var(--accent-coral);
+            font-weight: 500;
+            margin-top: -10px;
+            margin-bottom: 15px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .task-list {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .task-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .task-item:hover {
+            background: #fafafa;
+        }
+
+        .task-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            accent-color: var(--accent-teal);
+            cursor: pointer;
+        }
+
+        .task-text {
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        .task-item.completed .task-text {
+            text-decoration: line-through;
+            color: #999999;
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav-buttons">
+    <a href="index.html" class="btn-link">← 처음으로</a>
+    <a href="voe.html" class="btn-link">직원의 소리 쓰기 →</a>
+</div>
+
+<div class="header">
+    <h1>90일 온보딩 여정</h1>
+    <p>체크리스트를 하나씩 완료하며 삼천리의 멋진 일원으로 성장해 보세요.</p>
+</div>
+
+<!-- 상단 고정 진행률 바 -->
+<div class="progress-container">
+    <div class="progress-text">
+        <span>나의 온보딩 진행률</span>
+        <span id="progressPercent">0%</span>
+    </div>
+    <div class="progress-bar-bg">
+        <div id="progressBar" class="progress-bar-fill"></div>
+    </div>
+</div>
+
+<div class="task-list">
+    <!-- 단계 1 -->
+    <div class="section-title">Step 1. Pre-boarding</div>
+    <div class="section-desc">입사 전, 첫 출근을 준비하는 단계입니다.</div>
+    
+    <label class="task-item">
+        <input type="checkbox" class="onboard-chk" data-id="p1" onchange="updateProgress()">
+        <span class="task-text">기본 보건증 발급 신청 및 확인하기</span>
+    </label>
+    <label class="task-item">
+        <input type="checkbox" class="onboard-chk" data-id="p2" onchange="updateProgress()">
+        <span class="task-text">근로계약서 및 행정 서류 사전 확인하기</span>
+    </label>
+    <label class="task-item">
+        <input type="checkbox" class="onboard-chk" data-id="p3" onchange="updateProgress()">
+        <span class="task-text">매장 위치 및 첫 출근 시간 다시 한번 체크하기</span>
+    </label>
+
+    <!-- 단계 2 -->
+    <div class="section-title">Step 2. 첫 30일 (직무 숙련)</div>
+    <div class="section-desc">현장 업무와 기본 매뉴얼을 익히는 단계입니다.</div>
+    
+    <label class="task-item">
+        <input type="checkbox" class="onboard-chk" data-id="m1" onchange="updateProgress()">
+        <span class="task-text">담당 매장 FOH(홀) 기본 동선 및 테이블 번호 숙지하기</span>
+    </label>
+    <label class="task-item">
+        <input type="checkbox" class="onboard-chk" data-id="m2" onchange="updateProgress()">
+        <span class="task-text">3도 9경 중 '제1경: 따뜻한 맞이하기' 현장에서 실천해보기</span>
+    </label>
+    <label class="task-item">
+        <input type="checkbox" class="onboard-chk" data-id="m3" onchange="updateProgress()">
+        <span class="task-text">포스(POS) 조작 및 기본적인 결제 프로세스 익히기</span>
+    </label>
+
+    <!-- 단계 3 -->
+    <div class="section-title">Step 3. 60일 ~ 90일 (팀워크 & 가치 체화)</div>
+    <div class="section-desc">동료와 협업하고 삼천리의 핵심 가치를 내재화합니다.</div>
+    
+    <label class="task-item">
+        <input type="checkbox" class="onboard-chk" data-id="m4" onchange="updateProgress()">
+        <span class="task-text">피크 타임 시 동료들과 무리 없이 소통하며 주문 처리하기</span>
+    </label>
+    <label class="task-item">
+        <input type="checkbox" class="onboard-chk" data-id="m5" onchange="updateProgress()">
+        <span class="task-text">매장 건의사항이나 아쉬운 점이 있다면 VOE(직원의 소리) 제출해보기</span>
+    </label>
+</div>
+
+<script>
+    function updateProgress() {
+        const checkboxes = document.querySelectorAll('.onboard-chk');
+        const checkedboxes = document.querySelectorAll('.onboard-chk:checked');
+        
+        // 진행률 계산
+        const percent = checkboxes.length ? Math.round((checkedboxes.length / checkboxes.length) * 100) : 0;
+        
+        // UI 반영
+        document.getElementById('progressBar').style.width = percent + '%';
+        document.getElementById('progressPercent').innerText = percent + '%';
+        
+        // 취소선 클래스 토글 및 로컬 스토리지 저장 상태 수집
+        const state = {};
+        checkboxes.forEach(chk => {
+            const id = chk.getAttribute('data-id');
+            const item = chk.closest('.task-item');
+            if(chk.checked) {
+                item.classList.add('completed');
+                state[id] = true;
+            } else {
+                item.classList.remove('completed');
+                state[id] = false;
+            }
+        });
+        
+        localStorage.setItem('slc_onboarding_tasks', JSON.stringify(state));
+    }
+
+    // 페이지 로드 시 기존 데이터 불러오기
+    window.onload = function() {
+        const savedState = localStorage.getItem('slc_onboarding_tasks');
+        if(savedState) {
+            const state = JSON.parse(savedState);
+            const checkboxes = document.querySelectorAll('.onboard-chk');
+            checkboxes.forEach(chk => {
+                const id = chk.getAttribute('data-id');
+                if(state[id]) {
+                    chk.checked = true;
+                }
+            });
+        }
+        updateProgress();
+    }
+</script>
+
+</body>
+</html>
