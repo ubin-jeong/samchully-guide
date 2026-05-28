@@ -29,7 +29,7 @@
         }
 
         .nav-buttons {
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto 20px auto;
             display: flex;
             justify-content: space-between;
@@ -42,7 +42,7 @@
         }
 
         .header {
-            max-width: 600px;
+            max-width: 650px;
             margin: 20px auto 30px auto;
             text-align: center;
         }
@@ -69,7 +69,7 @@
 
         .download-btn {
             display: block;
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto 30px auto;
             text-align: center;
             background: var(--accent-amber);
@@ -81,9 +81,9 @@
             font-size: 14px;
         }
 
-        /* 이미지(image_acef40.png) 기반 구조 맵 */
+        /* 1. 이미지(image_acef40.png) 기반 상단 구조 맵 */
         .vision-map {
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto 40px auto;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -126,7 +126,6 @@
             color: var(--accent-teal);
         }
 
-        /* 3도(道) 수평 구도 */
         .map-3do-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -154,7 +153,6 @@
             color: var(--text-muted);
         }
 
-        /* 9경(經) 구도 */
         .map-9gyeong-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -179,7 +177,6 @@
             font-family: 'Noto Serif KR', serif;
         }
 
-        /* 구분 연결 점 구도 */
         .map-dot {
             width: 6px;
             height: 6px;
@@ -198,9 +195,9 @@
             padding-top: 15px;
         }
 
-        /* 세부 카드 구역 */
+        /* 2. 하단 3*3 빙고판(그리드) 실천 가이드 구역 */
         .grid-title {
-            max-width: 600px;
+            max-width: 650px;
             margin: 40px auto 15px auto;
             font-family: 'Noto Serif KR', serif;
             font-size: 18px;
@@ -208,50 +205,69 @@
             padding-bottom: 6px;
         }
 
-        .grid {
-            max-width: 600px;
-            margin: 0 auto;
+        .bingo-grid {
+            max-width: 650px;
+            margin: 0 auto 50px auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
         }
 
-        .card {
+        .bingo-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 16px;
+            padding: 18px 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            min-height: 220px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.01);
         }
 
         .card-num {
             font-family: 'Noto Serif KR', serif;
-            color: var(--accent-teal);
+            color: var(--accent-coral);
             font-weight: bold;
-            font-size: 13px;
+            font-size: 11px;
             margin-bottom: 4px;
             display: block;
         }
 
         .card-title {
-            font-family: 'Noto Serif KR', serif;
-            font-size: 18px;
+            font-size: 14px;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             color: var(--text-main);
+            line-height: 1.3;
         }
 
         .card-summary {
             font-weight: 500;
             color: var(--accent-teal);
-            font-size: 13.5px;
-            margin-bottom: 10px;
-            background: #f0f7f7;
-            padding: 8px 12px;
-            border-left: 3px solid var(--accent-teal);
+            font-size: 11.5px;
+            margin-bottom: 8px;
+            line-height: 1.4;
         }
 
         .card-detail {
-            font-size: 13px;
+            font-size: 11px;
             color: var(--text-muted);
-            line-height: 1.6;
+            line-height: 1.5;
+            text-align: justify;
+            border-top: 1px dashed var(--border-color);
+            padding-top: 8px;
+            margin-top: auto; /* 하단 밀착 효과 */
+        }
+
+        /* 모바일 대응 (화면이 너무 좁을 때는 1열로 스크롤 압박 줄이기 위해 3*3 유지하되 폰트 축소, 필요시 아래 미디어쿼리 활성화) */
+        @media (max-width: 500px) {
+            .bingo-grid {
+                grid-template-columns: 1fr;
+            }
+            .bingo-card {
+                min-height: auto;
+            }
         }
     </style>
 </head>
@@ -265,7 +281,7 @@
 <div class="header">
     <span>CHAPTER 2 · 3도 9경</span>
     <h1>삼천리 문화의 내재화</h1>
-    <p>여러분들은 90일의 여정을 통해 '사랑받는 기업' 삼천리의 일원이 될 것입니다.</p>
+    <p>우리 삼천리의 핵심 정신인 '3도 9경'은 다음과 같습니다.</p>
 </div>
 
 <!-- 포켓 가이드 다운로드 -->
@@ -273,24 +289,16 @@
 
 <!-- 구조 및 체화 구도 맵 (image_acef40.png 기반 구현) -->
 <div class="vision-map">
-    
-    <!-- 비전 -->
     <div class="map-section">
         <div class="map-label">Vision</div>
         <div class="map-value-box map-vision">"사랑받는 기업"</div>
     </div>
-    
     <div class="map-dot"></div>
-    
-    <!-- 미션 -->
     <div class="map-section">
         <div class="map-label">Mission</div>
         <div class="map-value-box map-mission">따뜻한 사회, 안전한 세상, 행복한 미래</div>
     </div>
-    
     <div class="map-dot"></div>
-    
-    <!-- 3도 -->
     <div class="map-section">
         <div class="map-label">Triple Core 3도(道)</div>
         <div class="map-3do-grid">
@@ -308,64 +316,101 @@
             </div>
         </div>
     </div>
-    
     <div class="map-dot"></div>
-    
-    <!-- 9경 -->
     <div class="map-section">
         <div class="map-label">Code Nine 9경(經)</div>
         <div class="map-9gyeong-grid">
-            <div class="gyeong-column">
-                가정애 직장애<br>자율과 책임<br>열린 소통
-            </div>
-            <div class="gyeong-column">
-                안전환경<br>인재중시<br>혁신도전
-            </div>
-            <div class="gyeong-column">
-                기업가치<br>고객중심<br>나눔상생
-            </div>
+            <div class="gyeong-column">가정애 직장애<br>자율과 책임<br>열린 소통</div>
+            <div class="gyeong-column">안전환경<br>인재중시<br>혁신도전</div>
+            <div class="gyeong-column">기업가치<br>고객중심<br>나눔상생</div>
         </div>
     </div>
-    
     <div class="map-dot"></div>
-    
-    <!-- 인재상 -->
     <div class="map-section">
         <div class="map-label">인재상</div>
         <div class="map-value-box map-talent">"사랑을 품은 열정인"</div>
     </div>
-
-    <!-- 하단 설명글 -->
     <p class="intro-text">
         3도는 사랑을 실현하는 세 가지 길이며, 9경은 3도를 일상에서 실천하는 9가지 원칙입니다. 우리 삼천리 구성원들은 이 '3도 9경'을 단순한 구호가 아닌 일상의 업무 방식으로 체화하여, 사회와 고객 모두에게 진심 어린 가치를 전하는 '사랑을 품은 열정인'으로 성장해 나갑니다.
     </p>
 </div>
 
-<!-- 세부 실천 가이드 카드 구역 -->
-<div class="grid-title">📌 현장 행동 실천 카드</div>
-<div class="grid">
-    <div class="card">
-        <span class="card-num">1경 | 가정애 직장애</span>
-        <h2 class="card-title">따뜻한 동료애와 책임감</h2>
-        <p class="card-summary">"동료를 가족처럼 아끼며 지속 가능한 일터를 만듭니다."</p>
-        <p class="card-detail">서로의 컨디션을 살피고 힘든 상황을 배려하며, 출근 일정 변경 등 약속된 규칙을 솔직하게 공유하여 신뢰를 유지합니다.</p>
-    </div>
-
-    <div class="card">
-        <span class="card-num">2경 | 자율과 책임</span>
-        <h2 class="card-title">주도적인 행동과 투명함</h2>
-        <p class="card-summary">"지시를 기다리지 않고 스스로 움직이며 솔직하게 공유합니다."</p>
-        <p class="card-detail">빈 테이블 세팅, 고객의 필요한 부분을 먼저 찾아 메우며, 근무 중 실수가 발생했을 때 은폐하지 않고 즉시 보고하여 해결합니다.</p>
-    </div>
-
-    <div class="card">
-        <span class="card-num">3경 | 열린 소통</span>
-        <h2 class="card-title">경험 공유와 투명한 소통</h2>
-        <p class="card-summary">"나의 실수와 경험을 나누어 건강한 매장 문화를 만듭니다."</p>
-        <p class="card-detail">'라떼는 보드' 등을 통해 실수를 공유하여 동료들의 반복 실수를 방지하고, 현장의 애로사항을 건강하게 제안합니다.</p>
-    </div>
+<!-- 3*3 빙고판 형식의 아홉 가지 경 실천 가이드 구역 -->
+<div class="grid-title">📌 3 × 3 현장 행동 실천 가이드</div>
+<div class="bingo-grid">
     
-    <!-- 필요시 나머지 4경~9경 카드도 같은 포맷으로 자유롭게 복사·붙여넣기 하시면 됩니다 -->
+    <!-- 1경 -->
+    <div class="bingo-card">
+        <span class="card-num">1경 | 즐거운 경영</span>
+        <h2 class="card-title">가정애 직장애</h2>
+        <p class="card-summary">"동료를 가족처럼, 직장을 가정처럼"</p>
+        <p class="card-detail">서로의 컨디션을 살피고 힘든 상황을 배려하며, 출근 일정 변경 시 무단 결근 없이 미리 공유해 따뜻하고 끈끈한 일터를 만듭니다.</p>
+    </div>
+
+    <!-- 2경 -->
+    <div class="bingo-card">
+        <span class="card-num">2경 | 즐거운 경영</span>
+        <h2 class="card-title">자율과 책임</h2>
+        <p class="card-summary">"지시 없이 먼저 움직이고 투명하게"</p>
+        <p class="card-detail">빈 테이블 세팅이나 손님의 필요를 먼저 찾아 주도적으로 움직이고, 현장 실수는 숨기지 않고 즉시 관리자에게 공유합니다.</p>
+    </div>
+
+    <!-- 3경 -->
+    <div class="bingo-card">
+        <span class="card-num">3경 | 즐거운 경영</span>
+        <h2 class="card-title">열린 소통</h2>
+        <p class="card-summary">"실수와 불편을 나누며 함께 성장"</p>
+        <p class="card-detail">'라떼는 보드'를 통해 업무 실수를 유쾌하게 공유해 동료들의 재발을 막고, 현장의 개선점을 솔직하게 소통합니다.</p>
+    </div>
+
+    <!-- 4경 -->
+    <div class="bingo-card">
+        <span class="card-num">4경 | 준비된 경영</span>
+        <h2 class="card-title">안전환경</h2>
+        <p class="card-summary">"철저한 위생과 완벽한 식품 안전"</p>
+        <p class="card-detail">손 씻기와 교차오염 방지를 체화하고, 알레르기 유발 물질 숙지 및 매장 내 낙상·화상 위험 구역을 인지하여 사고를 예방합니다.</p>
+    </div>
+
+    <!-- 5경 -->
+    <div class="bingo-card">
+        <span class="card-num">5경 | 준비된 경영</span>
+        <h2 class="card-title">인재중시</h2>
+        <p class="card-summary">"피드백을 흡수하며 배우려는 자세"</p>
+        <p class="card-detail">레시피와 메뉴 숙지를 귀찮아하지 않으며, 선배와 점장님의 현장 피드백을 방어하지 않고 성장을 위한 자양분으로 수용합니다.</p>
+    </div>
+
+    <!-- 6경 -->
+    <div class="bingo-card">
+        <span class="card-num">6경 | 준비된 경영</span>
+        <h2 class="card-title">혁신도전</h2>
+        <p class="card-summary">"일상 속 사소한 아이디어의 실천"</p>
+        <p class="card-detail">타 매장의 장점을 적극적으로 벤치마킹하고, 매장 운영 동선이나 서비스 효율을 높이기 위한 의견을 주저 없이 자유롭게 제안합니다.</p>
+    </div>
+
+    <!-- 7경 -->
+    <div class="bingo-card">
+        <span class="card-num">7경 | 함께하는 경영</span>
+        <h2 class="card-title">기업가치</h2>
+        <p class="card-summary">"브랜드 평판과 퀄리티 사수"</p>
+        <p class="card-detail">품질이 의심되는 음식을 절대 내보내지 않으며, 홀에서의 사적 대화를 자제하고 고객 앞에서 동료를 비난하지 않아 브랜드 신뢰를 지킵니다.</p>
+    </div>
+
+    <!-- 8경 -->
+    <div class="bingo-card">
+        <span class="card-num">8경 | 함께하는 경영</span>
+        <h2 class="card-title">고객중심</h2>
+        <p class="card-summary">"아이컨택 인사와 공감의 언어"</p>
+        <p class="card-detail">고객 입장 시 눈을 맞추며 먼저 미소로 활기차게 인사하고, 컴플레인 발생 시 "불편하셨겠어요" 등의 공감 한마디를 먼저 건넵니다.</p>
+    </div>
+
+    <!-- 9경 -->
+    <div class="bingo-card">
+        <span class="card-num">9경 | 함께하는 경영</span>
+        <h2 class="card-title">나눔상생</h2>
+        <p class="card-summary">"서로 돕는 피크타임의 팀워크"</p>
+        <p class="card-detail">바쁜 동료의 포지션을 먼저 지원하고, 자신이 터득한 현장 꿀팁을 아낌없이 공유하며, 새로 입사한 후배의 적응을 적극적으로 돕습니다.</p>
+    </div>
+
 </div>
 
 </body>
