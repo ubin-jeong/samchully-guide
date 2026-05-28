@@ -34,6 +34,107 @@
     color: var(--gray-800);
   }
 
+  /* ── 뷰 모드 전환 ── */
+  .view-controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+  }
+
+  .view-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background: var(--navy);
+    color: white;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+
+  .view-btn:hover {
+    background: var(--teal);
+  }
+
+  .view-btn.active {
+    background: var(--teal);
+  }
+
+  /* ── 단일 페이지 뷰 ── */
+  .single-page-container {
+    display: none;
+    max-width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .single-page-container.active {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .single-page-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .single-page-view {
+    width: var(--page-width);
+    min-height: 560px;
+    background: var(--white);
+    border-radius: 4px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: var(--gray-50);
+    gap: 20px;
+  }
+
+  .nav-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--gray-200);
+    border-radius: 4px;
+    background: var(--white);
+    color: var(--gray-800);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .nav-btn:hover:not(:disabled) {
+    background: var(--navy);
+    color: white;
+    border-color: var(--navy);
+  }
+
+  .nav-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .page-indicator {
+    font-size: 12px;
+    color: var(--gray-600);
+    font-weight: 500;
+  }
+
   /* ── 인쇄/화면 공통 레이아웃 ── */
   .book-grid {
     display: grid;
@@ -42,6 +143,10 @@
     justify-content: center;
     max-width: 1400px;
     margin: 0 auto;
+  }
+
+  .book-grid.hidden {
+    display: none;
   }
 
   /* ── 페이지 공통 ── */
@@ -390,12 +495,32 @@
     body { background: white; padding: 0; }
     .book-grid { gap: 0; grid-template-columns: var(--page-width); }
     .page { box-shadow: none; border-radius: 0; page-break-after: always; }
+    .view-controls, .single-page-container { display: none; }
   }
 </style>
 </head>
 <body>
 
-<div class="book-grid">
+<!-- ══════════════════ 뷰 전환 버튼 ══════════════════ -->
+<div class="view-controls">
+  <button class="view-btn active" onclick="switchView('grid')">한 페이지씩</button>
+  <button class="view-btn" onclick="switchView('all')">전체 보기</button>
+</div>
+
+<!-- ══════════════════ 단일 페이지 뷰 ══════════════════ -->
+<div class="single-page-container active">
+  <div class="single-page-wrapper">
+    <div id="singlePageView" class="single-page-view"></div>
+  </div>
+  <div class="page-navigation">
+    <button class="nav-btn" id="prevBtn" onclick="previousPage()">← 이전</button>
+    <span class="page-indicator"><span id="currentPage">1</span> / <span id="totalPages">24</span></span>
+    <button class="nav-btn" id="nextBtn" onclick="nextPage()">다음 →</button>
+  </div>
+</div>
+
+<!-- ══════════════════ 전체 그리드 뷰 ══════════════════ -->
+<div class="book-grid" id="bookGrid">
 
   <!-- ══════════════════ 표지 ══════════════════ -->
   <div class="page" style="min-height:600px;">
@@ -559,7 +684,7 @@
     <div class="page-inner">
       <div class="section-badge teal"><span class="dot"></span>30일 · 직무숙련</div>
       <div class="page-title" style="font-size:24px;">직무 수행<br>10단계 체크</div>
-      <div class="page-subtitle">완료하면 트레이너에게 스탬프를 받으세요</div>
+      <div class="page-subtitle">완료하면 트레이너에게 스탐프를 받으세요</div>
 
       <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">
         <div style="display:grid;grid-template-columns:24px 1fr 40px;gap:8px;align-items:center;padding:10px 12px;background:var(--gray-50);border-radius:3px;" v-for="i in 10">
@@ -812,7 +937,73 @@
 </div>
 
 <script>
-  // 미션 보드 애니메이션
+  let currentPageIndex = 0;
+  const pages = document.querySelectorAll('.page');
+  const totalPages = pages.length;
+
+  function updateSinglePageView() {
+    const viewContainer = document.getElementById('singlePageView');
+    const currentPage = pages[currentPageIndex];
+    viewContainer.innerHTML = currentPage.innerHTML;
+    
+    document.getElementById('currentPage').textContent = currentPageIndex + 1;
+    document.getElementById('totalPages').textContent = totalPages;
+    
+    // 버튼 활성화/비활성화
+    document.getElementById('prevBtn').disabled = currentPageIndex === 0;
+    document.getElementById('nextBtn').disabled = currentPageIndex === totalPages - 1;
+
+    // 미션 보드 애니메이션이 있으면 재실행
+    const bar = viewContainer.querySelector('#mpb');
+    const stat = viewContainer.querySelector('#ms-done');
+    if (bar && stat) {
+      let v = 0;
+      const t = setInterval(() => {
+        v += 3;
+        if (v > 65) { clearInterval(t); v = 65; }
+        bar.style.width = v + '%';
+        if (stat) stat.textContent = Math.round(v / 10);
+      }, 20);
+    }
+  }
+
+  function nextPage() {
+    if (currentPageIndex < totalPages - 1) {
+      currentPageIndex++;
+      updateSinglePageView();
+    }
+  }
+
+  function previousPage() {
+    if (currentPageIndex > 0) {
+      currentPageIndex--;
+      updateSinglePageView();
+    }
+  }
+
+  function switchView(view) {
+    const singleContainer = document.querySelector('.single-page-container');
+    const gridView = document.getElementById('bookGrid');
+    const buttons = document.querySelectorAll('.view-btn');
+
+    if (view === 'grid') {
+      singleContainer.classList.remove('active');
+      gridView.classList.remove('hidden');
+      buttons[0].classList.add('active');
+      buttons[1].classList.remove('active');
+    } else {
+      singleContainer.classList.add('active');
+      gridView.classList.add('hidden');
+      buttons[0].classList.remove('active');
+      buttons[1].classList.add('active');
+      updateSinglePageView();
+    }
+  }
+
+  // 초기화
+  updateSinglePageView();
+
+  // 미션 보드 애니메이션 (전체 보기용)
   setTimeout(() => {
     const bar = document.getElementById('mpb');
     const stat = document.getElementById('ms-done');
