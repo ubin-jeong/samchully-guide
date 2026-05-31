@@ -28,12 +28,12 @@
             padding: 20px 15px;
         }
 
-        /* 🌟 이 부분을 양쪽 정렬(space-between)이 정상 작동하도록 수정했습니다 */
+        /* 상단 네비게이션 바 */
         .nav-buttons {
             max-width: 600px;
             margin: 0 auto 20px auto;
             display: flex;
-            justify-content: space-between; /* 양쪽 끝으로 배정 */
+            justify-content: space-between;
             align-items: center;
         }
 
@@ -116,7 +116,7 @@
             margin-right: auto;
         }
 
-        /* 전체 온보딩 핵심 가이드 박스 */
+        /* 가이드 박스 */
         .program-box {
             max-width: 600px;
             margin: 0 auto 20px auto;
@@ -160,86 +160,17 @@
             line-height: 1.6;
         }
 
-        /* 주관식 입력 구역 스타일 */
-        .onething-input-container {
+        /* 📋 롤백된 체크리스트 스타일 (Pre-boarding용) */
+        .task-list {
             max-width: 600px;
-            margin: 20px auto;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
+            margin: 0 auto 30px auto;
         }
 
-        .onething-title {
-            font-size: 14px;
-            font-weight: bold;
-            color: var(--text-main);
-            margin-bottom: 12px;
-        }
-
-        .input-group {
-            margin-bottom: 12px;
-        }
-
-        .input-group label {
-            display: block;
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-            font-weight: 500;
-        }
-
-        .input-group input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-size: 13px;
-            color: var(--text-main);
-            background: var(--bg-color);
-        }
-
-        .input-group input[type="text"]:focus {
-            outline: none;
-            border-color: var(--accent-teal);
-            background: #fff;
-        }
-
-        .save-btn {
-            background: var(--text-main);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .save-btn:hover {
-            background: var(--accent-teal);
-        }
-
-        /* 구분선 */
-        .section-divider {
-            max-width: 600px;
-            margin: 30px auto;
-            border: none;
-            border-top: 2px dashed var(--border-color);
-        }
-
-        /* 미션 및 행동강령 타이틀 */
         .sub-heading {
-            max-width: 600px;
             margin: 15px auto 10px auto;
             font-size: 14px;
             font-weight: bold;
             color: var(--accent-teal);
-        }
-
-        /* 체크리스트 스타일 */
-        .task-list {
-            max-width: 600px;
-            margin: 0 auto 30px auto;
         }
 
         .task-item {
@@ -283,14 +214,93 @@
             color: #999999;
         }
 
-        /* 행동강령 소그룹 구분선 */
-        .code-group {
-            font-size: 12px;
+        /* 🌟 주관식 입력 컨테이너 및 우측 정렬 레이아웃 */
+        .onething-input-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .onething-title {
+            font-size: 14px;
             font-weight: bold;
-            color: var(--accent-coral);
-            margin-top: 15px;
-            margin-bottom: 5px;
+            color: var(--text-main);
+            margin-bottom: 12px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
             display: block;
+            font-size: 12.5px;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+
+        .guideline-text {
+            font-size: 12px;
+            color: var(--accent-teal);
+            background: #f0f7f7;
+            padding: 6px 10px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        /* 🌟 입력창과 저장 버튼을 가로로 정렬하는 래퍼 */
+        .input-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .input-row input[type="text"] {
+            flex: 1; /* 입력창이 남은 공간을 전부 차지 */
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 13px;
+            color: var(--text-main);
+            background: var(--bg-color);
+        }
+
+        .input-row input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent-teal);
+            background: #fff;
+        }
+
+        .save-btn {
+            background: var(--text-main);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            padding: 10px 14px;
+            font-size: 12.5px;
+            white-space: nowrap; /* 버튼 텍스트 줄바꿈 방지 */
+            height: 38px; /* 입력창과 높이 맞춤 */
+        }
+
+        .save-btn:hover {
+            background: var(--accent-teal);
+        }
+
+        /* 구분선 */
+        .section-divider {
+            max-width: 600px;
+            margin: 30px auto;
+            border: none;
+            border-top: 2px dashed var(--border-color);
         }
 
         /* 완주 혜택 안내 */
@@ -314,16 +324,14 @@
 </head>
 <body>
 
-<!-- 🌟 이 부분이 이제 화면 왼쪽 끝과 오른쪽 끝으로 깔끔하게 갈라집니다 -->
 <div class="nav-buttons">
     <a href="index.html" class="btn-link">← 처음으로</a>
-    <a href="about.html" class="btn-link">회사 소개 보기</a>
     <a href="voe.html" class="btn-link">직원의 소리 쓰기 →</a>
 </div>
 
 <div class="header">
     <h1>30-60-90 행동정착 프로그램</h1>
-    <p>삼천리 일터의 핵심 가치와 매장 실천 지침을 하나씩 완성해 나가는 여정입니다.</p>
+    <p>삼천리 일터의 핵심 가치와 매장 실천 지침을 직접 다짐하며 완성해 나가는 여정입니다.</p>
 </div>
 
 <!-- 고정형 진행률 바 -->
@@ -337,12 +345,12 @@
     </div>
 </div>
 
-<!-- 💡 온보딩 여정 전체에 해당하는 공동 약속 가이드 박스 -->
+<!-- 공동 약속 가이드 박스 -->
 <div class="program-box co-work">
     <span class="program-tag teal-tag">매니저(사수) X 신입 공동 약속</span>
     <div class="program-title">🤝 매일 5분의 몰입, 서로 성장을 돕는 동행 시간</div>
     <div class="program-body">
-        본 온보딩 프로그램은 신입 직원 혼자 외롭게 채워나가는 체크리스트가 아닙니다. 전체 온보딩 기간 동안, <strong>담당 매니저(사수)와 함께 매일 출근 직후 또는 퇴근 직전 5분간 함께 마주 앉아 대화를 나눕니다.</strong> 오늘 실천해야 할 집중 행동을 이야기 나누고, 서로의 기대를 조율하며 건강한 삼천리인으로 성장할 수 있도록 긴밀하게 동행해 주세요.
+        본 온보딩 프로그램은 혼자 채워나가는 숙제가 아닙니다. 전체 온보딩 기간 동안, <strong>담당 매니저(사수)와 함께 매일 출근 직후 또는 퇴근 직전 5분간 함께 마주 앉아 대화를 나눕니다.</strong> 아래 수립한 주차별 원씽과 각 경들의 다짐 행동을 이야기 나누고, 서로의 기대를 조율하며 건강하게 성장해 주세요.
     </div>
 </div>
 
@@ -350,14 +358,15 @@
 <div class="section-title">Pre-boarding</div>
 <div class="section-desc">채용 확정 후부터 첫 출근 전까지 준비하는 단계입니다.</div>
 
+<!-- 🌟 체크박스 형태로 깔끔하게 롤백 완료 -->
 <div class="task-list">
-    <div class="sub-heading">📋 실천 미션</div>
+    <div class="sub-heading">📋 필수 준비 체크리스트</div>
     <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="pb-1" onchange="updateProgress()">
+        <input type="checkbox" class="onboard-chk" data-id="pb_1" onchange="updateProgress()">
         <span class="task-text"><strong>매장 방문 미션 완료하기:</strong> 손님으로 매장에 방문하여 서비스 경험해보기</span>
     </label>
     <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="pb-2" onchange="updateProgress()">
+        <input type="checkbox" class="onboard-chk" data-id="pb_2" onchange="updateProgress()">
         <span class="task-text"><strong>디지털 선수학습 시청:</strong> 사전 발송된 법정 필수 교육 영상(급여·계약·성희롱 예방) 확인하기</span>
     </label>
 </div>
@@ -371,98 +380,141 @@
     <span class="program-tag">현장 프로그램</span>
     <div class="program-title">🎯 데일리 원씽 (Daily One Thing)</div>
     <div class="program-body">
-        담당 사수(버디)가 출근 전 오늘 집중할 하나의 구체적인 목표를 제안합니다. 퇴근 전 2분 동안 목표 달성에 대해 가볍게 이야기하며 하루를 마무리하세요.<br>
-        <strong>[주차별 목표 가이드]</strong> 1주차: 메뉴 숙지 | 2주차: 고객 응대 | 3주차: 돌발 상황 대처 | 4주차: Weak point 보완
+        담당 사수(버디)가 출근 전 오늘 집중할 하나의 구체적인 목표를 제안합니다. 퇴근 전 2분 동안 목표 달성에 대해 가볍게 이야기하며 하루를 마무리하세요.
     </div>
 </div>
 
-<!-- 주차별 원씽 직접 수립 주관식 입력 구역 (버튼 분리형 고도화) -->
+<!-- 주차별 원씽 수립 구역 (버튼 우측 배치) -->
 <div class="onething-input-container">
     <div class="onething-title">✍️ 나만의 주차별 데일리 원씽 수립하기</div>
-    <p style="font-size: 11px; color: var(--accent-coral); margin-bottom: 15px; line-height: 1.4;">
-        ※ 제약조건: 기지정된 행동강령 문구와 완벽히 일치하거나, 한글 기준 공백 제외 10자 이하일 경우 저장이 제한됩니다.
-    </p>
+    <p style="font-size: 11px; color: var(--accent-coral); margin-bottom: 15px;">※ 제약조건: 공백 제외 10자 이하 또는 예시 문구와 완벽 일치 시 저장이 불가능합니다.</p>
     
-    <!-- 1주차 -->
-    <div class="input-group" style="margin-bottom: 20px; border-bottom: 1px dashed var(--border-color); padding-bottom: 15px;">
-        <label for="week1_task" style="font-weight: bold; color: var(--text-main);">1주차 목표 (메뉴 숙지)</label>
-        <input type="text" id="week1_task" placeholder="예: 시그니처 딤섬 5가지 레시피 완벽히 암기하기" style="margin-bottom: 8px;">
-        <button class="save-btn" onclick="validateAndSaveEachWeek(1)" style="padding: 8px 12px; font-size: 12px; width: auto; float: right;">1주차 목표 저장</button>
-        <div style="clear: both;"></div>
+    <div class="input-group">
+        <label for="week1_task">1주차 목표 (메뉴 숙지)</label>
+        <div class="input-row">
+            <input type="text" id="week1_task" placeholder="예: 시그니처 딤섬 5가지 레시피 완벽히 암기하기">
+            <button class="save-btn" onclick="validateAndSaveEachWeek(1)">저장</button>
+        </div>
     </div>
     
-    <!-- 2주차 -->
-    <div class="input-group" style="margin-bottom: 20px; border-bottom: 1px dashed var(--border-color); padding-bottom: 15px;">
-        <label for="week2_task" style="font-weight: bold; color: var(--text-main);">2주차 목표 (고객 응대)</label>
-        <input type="text" id="week2_task" placeholder="예: 고객이 부르기 전에 눈 마주치며 먼저 응대하기" style="margin-bottom: 8px;">
-        <button class="save-btn" onclick="validateAndSaveEachWeek(2)" style="padding: 8px 12px; font-size: 12px; width: auto; float: right;">2주차 목표 저장</button>
-        <div style="clear: both;"></div>
+    <div class="input-group">
+        <label for="week2_task">2주차 목표 (고객 응대)</label>
+        <div class="input-row">
+            <input type="text" id="week2_task" placeholder="예: 고객이 부르기 전에 눈 마주치며 먼저 응대하기">
+            <button class="save-btn" onclick="validateAndSaveEachWeek(2)">저장</button>
+        </div>
     </div>
     
-    <!-- 3주차 -->
-    <div class="input-group" style="margin-bottom: 20px; border-bottom: 1px dashed var(--border-color); padding-bottom: 15px;">
-        <label for="week3_task" style="font-weight: bold; color: var(--text-main);">3주차 목표 (돌발 상황 대처)</label>
-        <input type="text" id="week3_task" placeholder="예: 주문 누락 확인 시 즉시 정중하게 사과하고 관리자 호출하기" style="margin-bottom: 8px;">
-        <button class="save-btn" onclick="validateAndSaveEachWeek(3)" style="padding: 8px 12px; font-size: 12px; width: auto; float: right;">3주차 목표 저장</button>
-        <div style="clear: both;"></div>
+    <div class="input-group">
+        <label for="week3_task">3주차 목표 (돌발 상황 대처)</label>
+        <div class="input-row">
+            <input type="text" id="week3_task" placeholder="예: 주문 누락 확인 시 즉시 정중하게 사과하고 관리자 호출하기">
+            <button class="save-btn" onclick="validateAndSaveEachWeek(3)">저장</button>
+        </div>
     </div>
     
-    <!-- 4주차 -->
-    <div class="input-group" style="margin-bottom: 10px;">
-        <label for="week4_task" style="font-weight: bold; color: var(--text-main);">4주차 목표 (Weak 보완)</label>
-        <input type="text" id="week4_task" placeholder="예: 피크 타임 포스기 정산 오류 나지 않도록 이중 체크하기" style="margin-bottom: 8px;">
-        <button class="save-btn" onclick="validateAndSaveEachWeek(4)" style="padding: 8px 12px; font-size: 12px; width: auto; float: right;">4주차 목표 저장</button>
-        <div style="clear: both;"></div>
+    <div class="input-group" style="margin-bottom: 5px;">
+        <label for="week4_task">4주차 목표 (Weak 보완)</label>
+        <div class="input-row">
+            <input type="text" id="week4_task" placeholder="예: 피크 타임 포스기 정산 오류 나지 않도록 이중 체크하기">
+            <button class="save-btn" onclick="validateAndSaveEachWeek(4)">저장</button>
+        </div>
     </div>
 </div>
 
-<!-- 주관식 칸과 행동강령 사이의 명확한 구분선 -->
 <hr class="section-divider">
 
-<div class="task-list">
-    <div class="sub-heading">📋 D+1~30 집중 행동강령 미션</div>
+<!-- D+1~30 행동강령 주관식 수립 구역 (버튼 우측 배치) -->
+<div class="onething-input-container">
+    <div class="onething-title" style="color: var(--accent-teal);">📋 D+1~30 핵심 행동강령 실천 선언</div>
+    <p style="font-size: 11px; color: var(--accent-coral); margin-bottom: 15px;">※ 제시된 가이드를 읽고 현장 실천 내용을 구체적으로 적어주세요. (가이드 복사 금지, 공백 제외 11자 이상)</p>
+
+    <h4 style="font-size: 13px; color: var(--accent-coral); margin-bottom: 10px;">[2경 | 자율과 책임 — "묻지 않고 먼저 하기"]</h4>
     
-    <span class="code-group">2경 | 자율과 책임 — "묻지 않고 먼저 하기"</span>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d30-1" onchange="updateProgress()">
-        <span class="task-text" id="target-d30-1">테이블이 비었을 때 점장님 지시 없이 스스로 세팅하기</span>
-    </label>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d30-2" onchange="updateProgress()">
-        <span class="task-text" id="target-d30-2">손님이 불편해 보일 때 요청을 기다리지 않고 먼저 다가가 도우미 역할 하기</span>
-    </label>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d30-3" onchange="updateProgress()">
-        <span class="task-text" id="target-d30-3">현장에서 실수했을 때 숨기지 않고 점장이나 트레이너에게 즉시 공유하기</span>
-    </label>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d30-4" onchange="updateProgress()">
-        <span class="task-text" id="target-d30-4">지급된 코칭카드를 현장에서 적극적으로 확인하고 활용하기</span>
-    </label>
+    <div class="input-group">
+        <label for="d30_1">행동강령 1. 주도적 테이블 세팅</label>
+        <div class="guideline-text">가이드: 테이블이 비었을 때 점장님 지시 없이 스스로 세팅하기</div>
+        <div class="input-row">
+            <input type="text" id="d30_1" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d30_1', '테이블이 비었을 때 점장님 지시 없이 스스로 세팅하기')">저장</button>
+        </div>
+    </div>
 
-    <span class="code-group">4경 | 안전환경 — "위생과 식품 안전"</span>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d30-5" onchange="updateProgress()">
-        <span class="task-text" id="target-d30-5">올바른 손 씻기 및 교차오염 방지 수칙을 준수하며 위생 청결 유지하기</span>
-    </label>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d30-6" onchange="updateProgress()">
-        <span class="task-text" id="target-d30-6">우리 매장 메뉴의 알레르기 유발 식품을 완벽히 숙지하고 고객에게 설명하기</span>
-    </label>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d30-7" onchange="updateProgress()">
-        <span class="task-text" id="target-d30-7">현장 내 낙상 및 화상 위험 구역 위치를 정확히 인지하고 주의하기</span>
-    </label>
+    <div class="input-group">
+        <label for="d30_2">행동강령 2. 선제적 고객 도우미</label>
+        <div class="guideline-text">가이드: 손님이 불편해 보일 때 요청을 기다리지 않고 먼저 다가가 도우미 역할 하기</div>
+        <div class="input-row">
+            <input type="text" id="d30_2" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d30_2', '손님이 불편해 보일 때 요청을 기다리지 않고 먼저 다가가 도우미 역할 하기')">저장</button>
+        </div>
+    </div>
 
-    <span class="code-group">5경 | 인재중시 — "배우려는 자세"</span>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d30-8" onchange="updateProgress()">
-        <span class="task-text" id="target-d30-8">매장 메뉴와 레시피 가이드를 미루지 않고 성실하게 외우기</span>
-    </label>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d30-9" onchange="updateProgress()">
-        <span class="task-text" id="target-d30-9">선배 및 점장님의 피드백을 방어적으로 듣지 않고 수용하기</span>
-    </label>
+    <div class="input-group">
+        <label for="d30_3">행동강령 3. 신속한 실수 공유</label>
+        <div class="guideline-text">가이드: 현장에서 실수했을 때 숨기지 않고 점장이나 트레이너에게 즉시 공유하기</div>
+        <div class="input-row">
+            <input type="text" id="d30_3" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d30_3', '현장에서 실수했을 때 숨기지 않고 점장이나 트레이너에게 즉시 공유하기')">저장</button>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="d30_4">행동강령 4. 코칭카드 적극 활용</label>
+        <div class="guideline-text">가이드: 지급된 코칭카드를 현장에서 적극적으로 확인하고 활용하기</div>
+        <div class="input-row">
+            <input type="text" id="d30_4" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d30_4', '지급된 코칭카드를 현장에서 적극적으로 확인하고 활용하기')">저장</button>
+        </div>
+    </div>
+
+    <h4 style="font-size: 13px; color: var(--accent-coral); margin-top: 25px; margin-bottom: 10px;">[4경 | 안전환경 — "위생과 식품 안전"]</h4>
+
+    <div class="input-group">
+        <label for="d30_5">행동강령 5. 교차오염 방지 및 위생</label>
+        <div class="guideline-text">가이드: 올바른 손 씻기 및 교차오염 방지 수칙을 준수하며 위생 청결 유지하기</div>
+        <div class="input-row">
+            <input type="text" id="d30_5" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d30_5', '올바른 손 씻기 및 교차오염 방지 수칙을 준수하며 위생 청결 유지하기')">저장</button>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="d30_6">행동강령 6. 알레르기 물질 숙지</label>
+        <div class="guideline-text">가이드: 우리 매장 메뉴의 알레르기 유발 식품을 완벽히 숙지하고 고객에게 설명하기</div>
+        <div class="input-row">
+            <input type="text" id="d30_6" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d30_6', '우리 매장 메뉴의 알레르기 유발 식품을 완벽히 숙지하고 고객에게 설명하기')">저장</button>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="d30_7">행동강령 7. 현장 안전사고 예방</label>
+        <div class="guideline-text">가이드: 현장 내 낙상 및 화상 위험 구역 위치를 정확히 인지하고 주의하기</div>
+        <div class="input-row">
+            <input type="text" id="d30_7" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d30_7', '현장 내 낙상 및 화상 위험 구역 위치를 정확히 인지하고 주의하기')">저장</button>
+        </div>
+    </div>
+
+    <h4 style="font-size: 13px; color: var(--accent-coral); margin-top: 25px; margin-bottom: 10px;">[5경 | 인재중시 — "배우려는 자세"]</h4>
+
+    <div class="input-group">
+        <label for="d30_8">행동강령 8. 레시피 및 가이드 암기</label>
+        <div class="guideline-text">가이드: 매장 메뉴와 레시피 가이드를 미루지 않고 성실하게 외우기</div>
+        <div class="input-row">
+            <input type="text" id="d30_8" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d30_8', '매장 메뉴와 레시피 가이드를 미루지 않고 성실하게 외우기')">저장</button>
+        </div>
+    </div>
+
+    <div class="input-group" style="margin-bottom: 5px;">
+        <label for="d30_9">행동강령 9. 개방적 피드백 수용</label>
+        <div class="guideline-text">가이드: 선배 및 점장님의 피드백을 방어적으로 듣지 않고 수용하기</div>
+        <div class="input-row">
+            <input type="text" id="d30_9" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d30_9', '선배 및 점장님의 피드백을 방어적으로 듣지 않고 수용하기')">저장</button>
+        </div>
+    </div>
 </div>
 
 
@@ -478,42 +530,79 @@
     </div>
 </div>
 
-<div class="task-list">
-    <div class="sub-heading">📋 D+31~60 집중 행동강령 미션</div>
+<!-- D+31~60 행동강령 주관식 수립 구역 (버튼 우측 배치) -->
+<div class="onething-input-container">
+    <div class="onething-title" style="color: var(--accent-teal);">📋 D+31~60 핵심 행동강령 실천 선언</div>
+    <p style="font-size: 11px; color: var(--accent-coral); margin-bottom: 15px;">※ 제시된 가이드를 읽고 본인만의 다짐 행동 문장을 적어주세요.</p>
+
+    <h4 style="font-size: 13px; color: var(--accent-coral); margin-bottom: 10px;">[3경 | 열린 소통 — "실수와 불편 경험의 자발적 공유"]</h4>
     
-    <span class="code-group">3경 | 열린 소통 — "실수와 불편 경험의 자발적 공유"</span>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d60-1" onchange="updateProgress()">
-        <span class="task-text">다음 동료가 같은 실수를 반복하지 않도록 나의 실수담을 '라떼보드'에 공유해보기</span>
-    </label>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d60-2" onchange="updateProgress()">
-        <span class="task-text">현장에서 겪은 불편사항을 숨기지 않고 솔직하게 소통하여 개선에 기여하기</span>
-    </label>
+    <div class="input-group">
+        <label for="d60_1">행동강령 1. 라떼보드 실수담 공유</label>
+        <div class="guideline-text">가이드: 다음 동료가 같은 실수를 반복하지 않도록 나의 실수담을 '라떼보드'에 공유해보기</div>
+        <div class="input-row">
+            <input type="text" id="d60_1" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d60_1', '다음 동료가 같은 실수를 반복하지 않도록 나의 실수담을 \'라떼보드\'에 공유해보기')">저장</button>
+        </div>
+    </div>
 
-    <span class="code-group">8경 | 고객중심 — "고객의 긍정적 경험 지키기"</span>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d60-3" onchange="updateProgress()">
-        <span class="task-text">손님이 입장하는 순간 명확하게 눈을 맞추며 먼저 미소로 활기차게 인사하기</span>
-    </label>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d60-4" onchange="updateProgress()">
-        <span class="task-text">불만 고객을 마주했을 때 변명보다 "불편하셨겠어요"라며 공감의 한마디 먼저 건네기</span>
-    </label>
+    <div class="input-group">
+        <label for="d60_2">행동강령 2. 현장 불편사항 솔직 소통</label>
+        <div class="guideline-text">가이드: 현장에서 겪은 불편사항을 숨기지 않고 솔직하게 소통하여 개선에 기여하기</div>
+        <div class="input-row">
+            <input type="text" id="d60_2" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d60_2', '현장에서 겪은 불편사항을 숨기지 않고 솔직하게 소통하여 개선에 기여하기')">저장</button>
+        </div>
+    </div>
 
-    <span class="code-group">9경 | 나눔상생 — "서로 돕는 끈끈한 팀워크"</span>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d60-5" onchange="updateProgress()">
-        <span class="task-text">피크 타임에 유독 손이 부족해 바빠 보이는 동료의 포지션을 먼저 찾아 도와주기</span>
-    </label>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d60-6" onchange="updateProgress()">
-        <span class="task-text">근무하며 터득한 나만의 소소한 현장 꿀팁이나 노하우를 동료들에게 아낌없이 공유하기</span>
-    </label>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d60-7" onchange="updateProgress()">
-        <span class="task-text">나보다 늦게 들어온 신입 파트타이머나 새로 합류한 동료의 매장 적응 적극적으로 돕기</span>
-    </label>
+    <h4 style="font-size: 13px; color: var(--accent-coral); margin-top: 25px; margin-bottom: 10px;">[8경 | 고객중심 — "고객의 긍정적 경험 지키기"]</h4>
+
+    <div class="input-group">
+        <label for="d60_3">행동강령 3. 아이컨택과 첫 미소 인사</label>
+        <div class="guideline-text">가이드: 손님이 입장하는 순간 명확하게 눈을 맞추며 먼저 미소로 활기차게 인사하기</div>
+        <div class="input-row">
+            <input type="text" id="d60_3" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d60_3', '손님이 입장하는 순간 명확하게 눈을 맞추며 먼저 미소로 활기차게 인사하기')">저장</button>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="d60_4">행동강령 4. 불만 고객 공감 응대</label>
+        <div class="guideline-text">가이드: 불만 고객을 마주했을 때 변명보다 &quot;불편하셨겠어요&quot;라며 공감의 한마디 먼저 건네기</div>
+        <div class="input-row">
+            <input type="text" id="d60_4" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d60_4', '불만 고객을 마주했을 때 변명보다 &quot;불편하셨겠어요&quot;라며 공감의 한마디 먼저 건네기')">저장</button>
+        </div>
+    </div>
+
+    <h4 style="font-size: 13px; color: var(--accent-coral); margin-top: 25px; margin-bottom: 10px;">[9경 | 나눔상생 — "서로 돕는 끈끈한 팀워크"]</h4>
+
+    <div class="input-group">
+        <label for="d60_5">행동강령 5. 바쁜 동료 선제적 백업</label>
+        <div class="guideline-text">가이드: 피크 타임에 유독 손이 부족해 바빠 보이는 동료의 포지션을 먼저 찾아 도와주기</div>
+        <div class="input-row">
+            <input type="text" id="d60_5" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d60_5', '피크 타임에 유독 손이 부족해 바빠 보이는 동료의 포지션을 먼저 찾아 도와주기')">저장</button>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="d60_6">행동강령 6. 현장 운영 꿀팁 아낌없는 공유</label>
+        <div class="guideline-text">가이드: 근무하며 터득한 나만의 소소한 현장 꿀팁이나 노하우를 동료들에게 아낌없이 공유하기</div>
+        <div class="input-row">
+            <input type="text" id="d60_6" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d60_6', '근무하며 터득한 나만의 소소한 현장 꿀팁이나 노하우를 동료들에게 아낌없이 공유하기')">저장</button>
+        </div>
+    </div>
+
+    <div class="input-group" style="margin-bottom: 5px;">
+        <label for="d60_7">행동강령 7. 후임 파트타이머 적응 지원</label>
+        <div class="guideline-text">가이드: 나보다 늦게 들어온 신입 파트타이머나 새로 합류한 동료의 매장 적응 적극적으로 돕기</div>
+        <div class="input-row">
+            <input type="text" id="d60_7" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d60_7', '나보다 늦게 들어온 신입 파트타이머나 새로 합류한 동료의 매장 적응 적극적으로 돕기')">저장</button>
+        </div>
+    </div>
 </div>
 
 
@@ -521,52 +610,99 @@
 <div class="section-title">D+61 ~ 90 | 가치 체화 및 애사심 고취</div>
 <div class="section-desc">삼천리의 브랜드 가치를 가슴 깊이 새기고 핵심 인재로 거듭나는 최종 단계입니다.</div>
 
-<div class="task-list">
-    <div class="sub-heading">📋 D+61~90 집중 행동강령 미션</div>
+<!-- D+61~90 행동강령 주관식 수립 구역 (버튼 우측 배치) -->
+<div class="onething-input-container">
+    <div class="onething-title" style="color: var(--accent-teal);">📋 D+61~90 핵심 행동강령 실천 선언</div>
+    <p style="font-size: 11px; color: var(--accent-coral); margin-bottom: 15px;">※ 제시된 가이드를 읽고 본인만의 다짐 행동 문장을 적어주세요.</p>
+
+    <h4 style="font-size: 13px; color: var(--accent-coral); margin-bottom: 10px;">[1경 | 가정애 직장애 — "지속 가능한 따뜻한 일터 만들기"]</h4>
     
-    <span class="code-group">1경 | 가정애 직장애 — "지속 가능한 따뜻한 일터 만들기"</span>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d90-1" onchange="updateProgress()">
-        <span class="task-text">지치거나 힘들어 보이는 동료의 상황을 감지했을 때, 먼저 다가가 따뜻한 말 건네기</span>
-    </label>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d90-2" onchange="updateProgress()">
-        <span class="task-text">부득이하게 출근 일정을 조정해야 할 때, 당일 무단 결근 없이 사전에 솔직하게 공유하기</span>
-    </label>
+    <div class="input-group">
+        <label for="d90_1">행동강령 1. 지친 동료 따뜻한 격려</label>
+        <div class="guideline-text">가이드: 지치거나 힘들어 보이는 동료의 상황을 감지했을 때, 먼저 다가가 따뜻한 말 건네기</div>
+        <div class="input-row">
+            <input type="text" id="d90_1" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d90_1', '지치거나 힘들어 보이는 동료의 상황을 감지했을 때, 먼저 다가가 따뜻한 말 건네기')">저장</button>
+        </div>
+    </div>
 
-    <span class="code-group">6경 | 혁신도전 — "일상 속 사소한 변화와 도전"</span>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d90-3" onchange="updateProgress()">
-        <span class="task-text">타 매장의 우수한 서비스나 운영 장점을 관찰하고 우리 매장에 적용할 점 벤치마킹하기</span>
-    </label>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d90-4" onchange="updateProgress()">
-        <span class="task-text">매장 운영 효율이나 동선 개선을 위해 주저하지 않고 아이디어나 새로운 의견 제안하기</span>
-    </label>
+    <div class="input-group">
+        <label for="d90_2">행동강령 2. 사전 일정 조율 및 무단근태 근절</label>
+        <div class="guideline-text">가이드: 부득이하게 출근 일정을 조정해야 할 때, 당일 무단 결근 없이 사전에 솔직하게 공유하기</div>
+        <div class="input-row">
+            <input type="text" id="d90_2" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d90_2', '부득이하게 출근 일정을 조정해야 할 때, 당일 무단 결근 없이 사전에 솔직하게 공유하기')">저장</button>
+        </div>
+    </div>
 
-    <span class="code-group">7경 | 기업가치 — "우리 브랜드의 평판 지키기"</span>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d90-5" onchange="updateProgress()">
-        <span class="task-text">음식의 품질이나 비주얼에 조금이라도 의심이 든다면 절대 임의로 고객에게 제공하지 않기</span>
-    </label>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d90-6" onchange="updateProgress()">
-        <span class="task-text">홀이나 고객이 볼 수 있는 공간에서 동료의 실수를 지적하거나 비난하지 않기</span>
-    </label>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d90-7" onchange="updateProgress()">
-        <span class="task-text">강한 컴플레인이 발생했을 때 혼자 끙끙 앓지 않고 즉시 점장에게 상황 공유하여 해결하기</span>
-    </label>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d90-8" onchange="updateProgress()">
-        <span class="task-text">홀에 손님이 머무르고 있을 때는 개인적인 대화를 삼가고 백룸 공간을 이용하기</span>
-    </label>
+    <h4 style="font-size: 13px; color: var(--accent-coral); margin-top: 25px; margin-bottom: 10px;">[6경 | 혁신도전 — "일상 속 사소한 변화와 도전"]</h4>
 
-    <div class="sub-heading" style="margin-top: 30px;">📋 최종 피드백 & 수료 미션</div>
-    <label class="task-item">
-        <input type="checkbox" class="onboard-chk" data-id="d90-9" onchange="updateProgress()">
-        <span class="task-text"><strong>상호 피드백 수집:</strong> 90일 시점에 웹사이트 내 '직원의 소리(VOE)' 탭을 통해 매장 운영 및 온보딩 피드백 제출하기</span>
-    </label>
+    <div class="input-group">
+        <label for="d90_3">행동강령 3. 타 매장 우수 서비스 벤치마킹</label>
+        <div class="guideline-text">가이드: 타 매장의 우수한 서비스나 운영 장점을 관찰하고 우리 매장에 적용할 점 벤치마킹하기</div>
+        <div class="input-row">
+            <input type="text" id="d90_3" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d90_3', '타 매장의 우수한 서비스나 운영 장점을 관찰하고 우리 매장에 적용할 점 벤치마킹하기')">저장</button>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="d90_4">행동강령 4. 효율적 매장 개선 의견 제안</label>
+        <div class="guideline-text">가이드: 매장 운영 효율이나 동선 개선을 위해 주저하지 않고 아이디어나 새로운 의견 제안하기</div>
+        <div class="input-row">
+            <input type="text" id="d90_4" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d90_4', '매장 운영 효율이나 동선 개선을 위해 주저하지 않고 아이디어나 새로운 의견 제안하기')">저장</button>
+        </div>
+    </div>
+
+    <h4 style="font-size: 13px; color: var(--accent-coral); margin-top: 25px; margin-bottom: 10px;">[7경 | 기업가치 — "우리 브랜드의 평판 지키기"]</h4>
+
+    <div class="input-group">
+        <label for="d90_5">행동강령 5. 완벽한 메뉴 품질 방어</label>
+        <div class="guideline-text">가이드: 음식의 품질이나 비주얼에 조금이라도 의심이 든다면 절대 임의로 고객에게 제공하지 않기</div>
+        <div class="input-row">
+            <input type="text" id="d90_5" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d90_5', '음식의 품질이나 비주얼에 조금이라도 의심이 든다면 절대 임의로 고객에게 제공하지 않기')">저장</button>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="d90_6">행동강령 6. 고객 공간 내 상호 존중 유지</label>
+        <div class="guideline-text">가이드: 홀이나 고객이 볼 수 있는 공간에서 동료의 실수를 지적하거나 비난하지 않기</div>
+        <div class="input-row">
+            <input type="text" id="d90_6" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d90_6', '홀이나 고객이 볼 수 있는 공간에서 동료의 실수를 지적하거나 비난하지 않기')">저장</button>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="d90_7">행동강령 7. 중대 컴플레인 즉시 핫라인 공유</label>
+        <div class="guideline-text">가이드: 강한 컴플레인이 발생했을 때 혼자 끙끙 앓지 않고 즉시 점장에게 상황 공유하여 해결하기</div>
+        <div class="input-row">
+            <input type="text" id="d90_7" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d90_7', '강한 컴플레인이 발생했을 때 혼자 끙끙 앓지 않고 즉시 점장에게 상황 공유하여 해결하기')">저장</button>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="d90_8">행동강령 8. 홀 내 사적 대화 근절</label>
+        <div class="guideline-text">가이드: 홀에 손님이 머무르고 있을 때는 개인적인 대화를 삼가고 백룸 공간을 이용하기</div>
+        <div class="input-row">
+            <input type="text" id="d90_8" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d90_8', '홀에 손님이 머무르고 있을 때는 개인적인 대화를 삼가고 백룸 공간을 이용하기')">저장</button>
+        </div>
+    </div>
+
+    <h4 style="font-size: 13px; color: var(--accent-teal); margin-top: 25px; margin-bottom: 10px;">[최종 수료 피드백 미션]</h4>
+    
+    <div class="input-group" style="margin-bottom: 5px;">
+        <label for="d90_9">행동강령 9. VOE 피드백 최종 제출</label>
+        <div class="guideline-text">가이드: 90일 시점에 웹사이트 내 '직원의 소리(VOE)' 탭을 통해 매장 운영 및 온보딩 피드백 제출하기</div>
+        <div class="input-row">
+            <input type="text" id="d90_9" placeholder="현장에서 어떻게 실천할지 나만의 다짐을 적어주세요.">
+            <button class="save-btn" onclick="validateAndSaveMission('d90_9', '90일 시점에 웹사이트 내 \'직원의 소리(VOE)\' 탭을 통해 매장 운영 및 온보딩 피드백 제출하기')">저장</button>
+        </div>
+    </div>
 </div>
 
 <!-- 완주 혜택 안내 구역 -->
@@ -583,99 +719,147 @@
 </div>
 
 <script>
-    // 검증 로직용 금지 문구 데이터 리스트
-    const forbiddenTexts = [
-        "테이블이 비었을 때 점장님 지시 없이 스스로 세팅하기",
-        "손님이 불편해 보일 때 요청을 기다리지 않고 먼저 다가가 도우미 역할 하기",
-        "현장에서 실수했을 때 숨기지 않고 점장이나 트레이너에게 즉시 공유하기",
-        "지급된 코칭카드를 현장에서 적극적으로 확인하고 활용하기",
-        "올바른 손 씻기 및 교차오염 방지 수칙을 준수하며 위생 청결 유지하기",
-        "우리 매장 메뉴의 알레르기 유발 식품을 완벽히 숙지하고 고객에게 설명하기",
-        "현장 내 낙상 및 화상 위험 구역 위치를 정확히 인지하고 주의하기",
-        "매장 메뉴와 레시피 가이드를 미루지 않고 성실하게 외우기",
-        "선배 및 점장님의 피드백을 방어적으로 듣지 않고 수용하기"
+    // 🌟 Pre-boarding용 체크박스 ID 리스트
+    const checkboxIds = ['pb_1', 'pb_2'];
+
+    // 🌟 30-60-90 주관식 입력창 ID 리스트
+    const textMissionIds = [
+        'week1_task', 'week2_task', 'week3_task', 'week4_task',
+        'd30_1', 'd30_2', 'd30_3', 'd30_4', 'd30_5', 'd30_6', 'd30_7', 'd30_8', 'd30_9',
+        'd60_1', 'd60_2', 'd60_3', 'd60_4', 'd60_5', 'd60_6', 'd60_7',
+        'd90_1', 'd90_2', 'd90_3', 'd90_4', 'd90_5', 'd90_6', 'd90_7', 'd90_8', 'd90_9'
     ];
 
-    // 주차별 개별 저장 및 검증 함수
+    // 1. 주차별 원씽 개별 저장 및 검증
     function validateAndSaveEachWeek(weekNum) {
         const inputEl = document.getElementById(`week${weekNum}_task`);
         const val = inputEl.value.trim();
-        const cleanVal = val.replace(/\s+/g, ''); // 공백 제거 후 글자 수 계산
+        const cleanVal = val.replace(/\s+/g, '');
 
-        // 1. 공백 제외 10자 이하 검증
         if (val === "" || cleanVal.length <= 10) {
             alert(`[저장 실패] ${weekNum}주차 목표가 너무 짧거나 비어있습니다.\n공백을 제외하고 최소 11자 이상 구체적으로 작성해 주세요.`);
             return;
         }
 
-        // 2. 행동강령 중복 복사 검증
-        if (forbiddenTexts.includes(val)) {
-            alert(`[저장 실패] ${weekNum}주차에 입력하신 문장은 이미 제시된 행동강령 미션과 완벽히 일치합니다.\n복사 붙여넣기가 아닌 신입 직원 본인의 다짐 문장으로 수정해 주세요.`);
+        let savedGoals = localStorage.getItem('slc_onething_goals');
+        savedGoals = savedGoals ? JSON.parse(savedGoals) : {};
+        savedGoals[`week${weekNum}_task`] = val;
+        
+        localStorage.setItem('slc_onething_goals', JSON.stringify(savedGoals));
+        alert(`🎉 ${weekNum}주차 데일리 원씽이 성공적으로 저장되었습니다!`);
+        updateProgress();
+    }
+
+    // 2. 각 경별 행동강령 미션 주관식 저장 및 검증
+    function validateAndSaveMission(inputId, guideText) {
+        const inputEl = document.getElementById(inputId);
+        const val = inputEl.value.trim();
+        const cleanVal = val.replace(/\s+/g, '');
+
+        if (val === "" || cleanVal.length <= 10) {
+            alert(`[저장 실패] 입력한 다짐 문장이 너무 짧습니다.\n공백을 제외하고 최소 11자 이상 현장 실천 내용을 구체적으로 적어주세요.`);
             return;
         }
 
-        // 기존 저장된 데이터 가져오기 및 해당 주차 데이터만 갱신
-        let savedGoals = localStorage.getItem('slc_onething_goals');
-        savedGoals = savedGoals ? JSON.parse(savedGoals) : { week1: '', week2: '', week3: '', week4: '' };
-        
-        savedGoals[`week${weekNum}`] = val;
-        
-        // 로컬 스토리지에 최종 저장
-        localStorage.setItem('slc_onething_goals', JSON.stringify(savedGoals));
-        alert(`🎉 ${weekNum}주차 목표가 성공적으로 검증되어 저장되었습니다!`);
+        if (val === guideText) {
+            alert(`[저장 실패] 제시된 행동 가이드 문장을 그대로 복사해서 저장할 수 없습니다.\n신입 직원 본인만의 실천 의지가 담긴 문장으로 수정해 주세요.`);
+            return;
+        }
+
+        let savedMissions = localStorage.getItem('slc_mission_answers');
+        savedMissions = savedMissions ? JSON.parse(savedMissions) : {};
+        savedMissions[inputId] = val;
+
+        localStorage.setItem('slc_mission_answers', JSON.stringify(savedMissions));
+        alert(`🎉 행동 실천 선언이 성공적으로 저장되었습니다!`);
+        updateProgress();
     }
 
-    // 진행률 업데이트 함수
+    // 3. 진행률 업데이트 함수 (체크박스 체크 상태 + 주관식 저장 완료 수 통합 산정)
     function updateProgress() {
-        const checkboxes = document.querySelectorAll('.onboard-chk');
-        const checkedboxes = document.querySelectorAll('.onboard-chk:checked');
-        
-        const percent = checkboxes.length ? Math.round((checkedboxes.length / checkboxes.length) * 100) : 0;
+        let completedCount = 0;
+
+        // A. 프리보딩 체크박스 상태 확인 및 스타일 처리
+        checkboxIds.forEach(id => {
+            const chk = document.querySelector(`.onboard-chk[data-id="${id}"]`);
+            if (chk) {
+                const item = chk.closest('.task-item');
+                if (chk.checked) {
+                    item.classList.add('completed');
+                    completedCount++;
+                } else {
+                    item.classList.remove('completed');
+                }
+            }
+        });
+
+        // B. 주관식 데이터 확인
+        let savedGoals = localStorage.getItem('slc_onething_goals');
+        savedGoals = savedGoals ? JSON.parse(savedGoals) : {};
+
+        let savedMissions = localStorage.getItem('slc_mission_answers');
+        savedMissions = savedMissions ? JSON.parse(savedMissions) : {};
+
+        textMissionIds.forEach(id => {
+            if (savedGoals[id] || savedMissions[id]) {
+                completedCount++;
+            }
+        });
+
+        // C. 전체 진행률 저장 및 UI 업데이트
+        const totalItems = checkboxIds.length + textMissionIds.length;
+        const percent = Math.round((completedCount / totalItems) * 100);
         
         document.getElementById('progressBar').style.width = percent + '%';
         document.getElementById('progressPercent').innerText = percent + '%';
-        
-        const state = {};
-        checkboxes.forEach(chk => {
-            const id = chk.getAttribute('data-id');
-            const item = chk.closest('.task-item');
-            if(chk.checked) {
-                item.classList.add('completed');
-                state[id] = true;
-            } else {
-                item.classList.remove('completed');
-                state[id] = false;
-            }
+
+        // 체크박스들 상태만 별도 저장 (새로고침 대응)
+        const chkState = {};
+        checkboxIds.forEach(id => {
+            const chk = document.querySelector(`.onboard-chk[data-id="${id}"]`);
+            chkState[id] = chk ? chk.checked : false;
         });
-        
-        localStorage.setItem('slc_onboarding_tasks_v3', JSON.stringify(state));
+        localStorage.setItem('slc_pb_checkbox_state', JSON.stringify(chkState));
     }
 
-    // 페이지 로드 시 데이터 복원
+    // 페이지 로드 시 데이터 복원 및 진행률 반영
     window.onload = function() {
-        // 체크박스 상태 복원
-        const savedState = localStorage.getItem('slc_onboarding_tasks_v3');
-        if(savedState) {
-            const state = JSON.parse(savedState);
-            const checkboxes = document.querySelectorAll('.onboard-chk');
-            checkboxes.forEach(chk => {
-                const id = chk.getAttribute('data-id');
-                if(state[id]) {
+        // 프리보딩 체크박스 상태 복원
+        const savedChks = localStorage.getItem('slc_pb_checkbox_state');
+        if(savedChks) {
+            const chkState = JSON.parse(savedChks);
+            checkboxIds.forEach(id => {
+                const chk = document.querySelector(`.onboard-chk[data-id="${id}"]`);
+                if(chk && chkState[id]) {
                     chk.checked = true;
                 }
             });
         }
-        updateProgress();
 
-        // 저장된 주차별 원씽 데이터 복원
+        // 주차별 원씽 데이터 로드
         const savedGoals = localStorage.getItem('slc_onething_goals');
         if(savedGoals) {
             const goals = JSON.parse(savedGoals);
-            if(goals.week1) document.getElementById('week1_task').value = goals.week1;
-            if(goals.week2) document.getElementById('week2_task').value = goals.week2;
-            if(goals.week3) document.getElementById('week3_task').value = goals.week3;
-            if(goals.week4) document.getElementById('week4_task').value = goals.week4;
+            textMissionIds.forEach(id => {
+                if(goals[id] && document.getElementById(id)) {
+                    document.getElementById(id).value = goals[id];
+                }
+            });
         }
+
+        // 각 경별 주관식 다짐 데이터 로드
+        const savedMissions = localStorage.getItem('slc_mission_answers');
+        if(savedMissions) {
+            const mData = JSON.parse(savedMissions);
+            textMissionIds.forEach(id => {
+                if(mData[id] && document.getElementById(id)) {
+                    document.getElementById(id).value = mData[id];
+                }
+            });
+        }
+        
+        // 최종 진행률 바 업데이트
+        updateProgress();
     }
 </script>
 
